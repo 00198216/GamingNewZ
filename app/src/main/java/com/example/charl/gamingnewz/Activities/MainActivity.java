@@ -1,4 +1,4 @@
-package com.example.charl.gamingnewz;
+package com.example.charl.gamingnewz.Activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.charl.gamingnewz.R;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -81,13 +83,14 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.news) {
-            // Handle the camera action
+            // Fragment de noticias
         } else if (id == R.id.games) {
 
         } else if (id == R.id.settings) {
+            // Fragment de settings
 
         } else if (id == R.id.favorites) {
-
+            // Fragment de favoritos
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
