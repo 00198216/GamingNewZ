@@ -4,7 +4,7 @@
     <!-- Gradient usado en el header de la app -->
     <gradient
         android:angle="135"
-        android:centerColor="#0D47A1"
+        android:centerColor="#1565C0"
         android:endColor="#000"
         android:startColor="#000"
         android:type="linear" />

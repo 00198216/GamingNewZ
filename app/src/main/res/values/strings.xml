@@ -7,10 +7,14 @@
     <string name="nav_header_title">Lucina</string>
     <string name="nav_header_subtitle">Great Lord</string>
     <string name="nav_header_desc">Navigation header</string>
-
     <string name="action_settings">Settings</string>
-    <string name="news">News</string>
-    <string name="games">Games</string>
-    <string name="settings">Settings</string>
-    <string name="favorites">Favorites</string>
+    <string name="news">Ultimas Noticias</string>
+    <string name="games">Juegos</string>
+    <string name="games1">League of Legends</string>
+    <string name="games2">Dota</string>
+    <string name="games3">CSGO</string>
+    <string name="settings">Configuracion</string>
+    <string name="favorites">Favoritos</string>
+    <string name="noticias">Noticias</string>
+    <string name="otros">Otros</string>
 </resources>
