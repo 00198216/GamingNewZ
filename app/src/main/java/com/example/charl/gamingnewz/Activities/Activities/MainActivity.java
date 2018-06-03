@@ -1,4 +1,4 @@
-package com.example.charl.gamingnewz.Activities;
+package com.example.charl.gamingnewz.Activities.Activities;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;

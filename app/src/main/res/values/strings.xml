@@ -17,4 +17,7 @@
     <string name="favorites">Favoritos</string>
     <string name="noticias">Noticias</string>
     <string name="otros">Otros</string>
+    <string name="name_new">name new</string>
+    <string name="news_title">News Title</string>
+    <string name="info">Info</string>
 </resources>
