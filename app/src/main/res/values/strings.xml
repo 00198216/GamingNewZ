@@ -20,4 +20,8 @@
     <string name="name_new">name new</string>
     <string name="news_title">News Title</string>
     <string name="info">Info</string>
+    <string name="sign_in">Sign in</string>
+    <string name="password">Password</string>
+
+
 </resources>

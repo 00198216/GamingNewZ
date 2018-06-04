@@ -2,9 +2,11 @@ package com.example.charl.gamingnewz.Activities.Activities;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,10 +17,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.charl.gamingnewz.Activities.Fragments.MainNews;
 import com.example.charl.gamingnewz.R;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener , MainNews.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,11 +77,18 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+
+
+        Fragment f = null;
+        boolean state =false;
+
         int id = item.getItemId();
 
         if (id == R.id.news) {
-            // Fragment de noticias
+
+            f= new MainNews();
+            state= true;
+
         } else if (id == R.id.games1) {
 
         } else if (id == R.id.settings) {
@@ -88,8 +98,17 @@ public class MainActivity extends AppCompatActivity
             // Fragment de favoritos
         }
 
+        if(state){
+            getSupportFragmentManager().beginTransaction().replace(R.id.content,f).commit();
+        }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
