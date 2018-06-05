@@ -5,12 +5,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.charl.gamingnewz.Activities.Interfaces.GamingNewZAPI;
+import com.example.charl.gamingnewz.Activities.Interfaces.TokenDeserializer;
+import com.example.charl.gamingnewz.Activities.POJO.Users;
 import com.example.charl.gamingnewz.R;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.net.SocketTimeoutException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Login extends AppCompatActivity {
 
     Button button;
+    EditText User;
+    EditText Pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,13 +35,53 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         button=findViewById(R.id.enviar);
+        User = findViewById(R.id.email);
+        Pass= findViewById(R.id.password);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                startActivity(intent);
-                finish();
+                if(!User.getText().toString().isEmpty() || !Pass.getText().toString().isEmpty()) {
+                    FindToken();
+                }
+                else{
+                    Toast.makeText(Login.this,"Termine de Llenar los Datos",Toast.LENGTH_SHORT).show();
+                }
             }
         });
+    }
+
+    //Esta funcion se encargara de evaluar el tocken.
+    private void FindToken(){
+        Gson gson = new GsonBuilder().registerTypeAdapter(String.class, new TokenDeserializer()).create(); //Creamos el Gson por medio de Gson builder
+        Retrofit.Builder builder = new Retrofit.Builder().baseUrl(GamingNewZAPI.FINISH).addConverterFactory(GsonConverterFactory.create(gson)); //La creacion de el retrofit para sus uso.
+        Retrofit retrofit = builder.build(); //Inicializamos el Retrofit.
+        GamingNewZAPI gamingNewZAPI = retrofit.create(GamingNewZAPI.class); //Se manda la info a la API.
+        Users users = new Users(User.getText().toString(),Pass.getText().toString()); //Creamos un nuevo usuario.
+        Call<String> call= gamingNewZAPI.login(users.getUser(),users.getPassword()); //inicializamos Call
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) { //Si la llamada es exitosa
+                if(response.isSuccessful() && !response.body().equals("")){
+                    Toast.makeText(Login.this,"Token: "+response.body(),Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else{
+                    Toast.makeText(Login.this,"No response",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {   //Si la llamda falla
+               if(t instanceof SocketTimeoutException){
+                   Toast.makeText(Login.this,"false",Toast.LENGTH_SHORT).show();
+               }
+            }
+        });
+
+
     }
 }

@@ -22,6 +22,11 @@
     <string name="info">Info</string>
     <string name="sign_in">Sign in</string>
     <string name="password">Password</string>
+    <string name="title_activity_lol">Lol</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
