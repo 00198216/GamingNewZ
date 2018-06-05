@@ -1,6 +1,5 @@
 package com.example.charl.gamingnewz.Activities.POJO;
 
-import com.example.charl.gamingnewz.Activities.Objects.News;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

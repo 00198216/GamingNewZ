@@ -1,21 +1,31 @@
 package com.example.charl.gamingnewz.Activities.Fragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.charl.gamingnewz.Activities.Adapters.NewsAdapter;
-import com.example.charl.gamingnewz.Activities.Objects.News;
+import com.example.charl.gamingnewz.Activities.Interfaces.GamingNewZAPI;
+import com.example.charl.gamingnewz.Activities.POJO.News;
 import com.example.charl.gamingnewz.R;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,7 +42,8 @@ public class MainNews extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     RecyclerView rv;
     NewsAdapter adapter;
-    ArrayList<News> news;
+    ArrayList<News> newz;
+    private String token;
     GridLayoutManager gManager;
 
 
@@ -67,10 +78,7 @@ public class MainNews extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
@@ -78,11 +86,15 @@ public class MainNews extends Fragment {
                              Bundle savedInstanceState) {
         View vista = inflater.inflate(R.layout.fragment_main_news, container, false);
 
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LToken", Context.MODE_PRIVATE);
+        token = sharedPreferences.getString("Token","");
+
+
 
         rv = vista.findViewById(R.id.recycler);
 
 
-       news = new ArrayList<>();
+       newz = new ArrayList<>();
 
 
         gManager = new GridLayoutManager(getActivity(), 2);
@@ -99,13 +111,19 @@ public class MainNews extends Fragment {
 
 
         rv.setLayoutManager(gManager);
-        prepareSeries();
+        prepareNews();
 
-        adapter = new NewsAdapter(news);
+
+
+
+        adapter = new NewsAdapter(newz);
+
+
 
 
 
         rv.setAdapter(adapter);
+
 
         return vista;
     }
@@ -150,15 +168,34 @@ public class MainNews extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-        public void prepareSeries(){
-           news = new ArrayList<>();
-            news.add(new News("Kind", R.drawable.wdd, " Desc"));
-            news.add(new News("Kindd", R.drawable.wdd, " Desc1"));
-            news.add(new News("Kinddd", R.drawable.wdd, " Desc2"));
-            news.add(new News("Weeddd", R.drawable.wdd, " Desc3"));
-            news.add(new News("Weeddd", R.drawable.wdd, " Desc4"));
-            news.add(new News("Weeddd2", R.drawable.wdd, " Desc5"));
-            news.add(new News("Weeddd3", R.drawable.wdd, " Desc8"));
+        public void prepareNews(){
+            Retrofit retrofit = new Retrofit.Builder().baseUrl(GamingNewZAPI.FINISH).addConverterFactory(GsonConverterFactory.create(new Gson())).build();
+            GamingNewZAPI GNZAPI = retrofit.create(GamingNewZAPI.class);
+            Call<ArrayList<News>> news = GNZAPI.getNews("Beared " + token);
+            news.enqueue(new Callback<ArrayList<News>>() {
+
+
+                @Override
+                public void onResponse(Call<ArrayList<News>> call, Response<ArrayList<News>> response) {
+                    if(response.isSuccessful()){
+                        Toast.makeText(getContext(),"Loading Data....",Toast.LENGTH_SHORT).show();
+
+                        newz = (ArrayList<News>) response.body();
+                        Toast.makeText(getContext(),newz.get(0).getGame(),Toast.LENGTH_LONG).show();
+                    }else {
+                        Toast.makeText(getContext(),"Error al cargar noticias",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(),token,Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ArrayList<News>> call, Throwable t) {
+                    Toast.makeText(getContext(),"Error de coneccion",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),token,Toast.LENGTH_LONG).show();
+                }
+            });
+
+
 
         }
 }
