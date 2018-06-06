@@ -20,7 +20,7 @@ public class NewsDeserializer implements JsonDeserializer<News> {
 
         //System.out.println(json.getAsJsonObject()); // Debido a ser tantos datos. No es recomendable imprimirlos todos.
 
-        JsonArray jsonObject = json.getAsJsonArray();  //Crea un objeto tipo Json Object
+       /* JsonArray jsonObject = json.getAsJsonArray();  //Crea un objeto tipo Json Object
 
         //Proseguimos a cargar Gnews con la informacion por cada campo.
 
@@ -31,6 +31,18 @@ public class NewsDeserializer implements JsonDeserializer<News> {
         Gnews.setCreated_date(jsonObject.getAsString());
         Gnews.setCoverImage(jsonObject.getAsString());
         Gnews.setDescription(jsonObject.getAsString());
+
+        return Gnews;
+        */
+        JsonObject jsonObject = json.getAsJsonObject(); //Usaremos Objects
+
+        Gnews.setId(jsonObject.get("_id").getAsString());
+        Gnews.setTitle(jsonObject.get("title").getAsString());
+        Gnews.setBody(jsonObject.get("body").getAsString());
+        Gnews.setGame(jsonObject.get("game").getAsString());
+        Gnews.setCreated_date(jsonObject.get("created_date").getAsString());
+        Gnews.setCoverImage(jsonObject.get("coverImage").getAsString());
+        Gnews.setDescription(jsonObject.get("description").getAsString());
 
         return Gnews;
     }

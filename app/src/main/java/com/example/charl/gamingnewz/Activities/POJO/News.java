@@ -9,8 +9,8 @@ public class News implements Serializable,Comparable<News> {
 
     private String id;  //Id de la noticia
     private int image;  //Imagen de la noticia
-    private String titulo; //Titulo de la noticia.
-    private String subtitulo; //Subtitulo de la noticia.
+    private String title; //Titulo de la noticia.
+    private String body; //Subtitulo de la noticia.
     private String game;      //De que juego es. ***De esto dependera a la hora de jalar las noticias para juegos individuales.
     private String created_date; //Date de la noticia en cuestion.
     private String coverImage;   //Cover Image del juego. Otra vez, Esta imagen dependerade el dato "game"
@@ -24,10 +24,9 @@ public class News implements Serializable,Comparable<News> {
     //Constructor sin Check. For testing purposes.
     public News(int image, String titulo, String subtitulo) {
         this.image = image;
-        this.titulo = titulo;
-        this.subtitulo = subtitulo;
+        this.title = titulo;
+        this.body = body;
     }
-
 
     public String getId() {
         return id;
@@ -45,20 +44,20 @@ public class News implements Serializable,Comparable<News> {
         this.image = image;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getSubtitulo() {
-        return subtitulo;
+    public String getBody() {
+        return body;
     }
 
-    public void setSubtitulo(String subtitulo) {
-        this.subtitulo = subtitulo;
+    public void setBody(String body) {
+        this.body = body;
     }
 
     public String getGame() {
@@ -100,7 +99,6 @@ public class News implements Serializable,Comparable<News> {
     public void setDescription(String description) {
         this.description = description;
     }
-
 
     //Metodo de comparacion para Comparable<News>
     @Override

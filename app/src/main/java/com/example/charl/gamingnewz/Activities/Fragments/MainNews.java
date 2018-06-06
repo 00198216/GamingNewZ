@@ -129,7 +129,6 @@ public class MainNews extends Fragment {
 
                     rv.setAdapter(adapter);
 
-                    Toast.makeText(getContext(),response.body().get(13).getTitulo(),Toast.LENGTH_LONG).show();
                 }else {
                     Toast.makeText(getContext(),"Error al cargar noticias",Toast.LENGTH_LONG).show();
                     Toast.makeText(getContext(),token,Toast.LENGTH_LONG).show();
