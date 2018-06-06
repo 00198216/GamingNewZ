@@ -1,5 +1,7 @@
 package com.example.charl.gamingnewz.Activities.Activities;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.net.Uri;
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.content,new MainNews()).commit();
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -80,6 +84,7 @@ public class MainActivity extends AppCompatActivity
 
 
         Fragment f = null;
+
         boolean state =false;
 
         int id = item.getItemId();
@@ -92,7 +97,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.games1) {
 
         } else if (id == R.id.settings) {
-            // Fragment de settings
+
+            Intent intent = new Intent(getApplicationContext(), Settings.class);
+            startActivity(intent);
 
         } else if (id == R.id.favorites) {
             // Fragment de favoritos

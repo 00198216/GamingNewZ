@@ -65,7 +65,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onResponse(Call<String> call, Response<String> response) { //Si la llamada es exitosa
                 if(response.isSuccessful() && !response.body().equals("")){
-                    sharedpreferences(response.body());
+                    sharedpreferences(response.body(),User.getText().toString(),Pass.getText().toString());
                     Toast.makeText(Login.this,"Token: "+response.body(),Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
@@ -87,10 +87,12 @@ public class Login extends AppCompatActivity {
     }
 
     //Mediante SharedPreferences guardamos la informacion
-    private void sharedpreferences(String token){
+    private void sharedpreferences(String token,String Usr,String Pass){
         SharedPreferences sharedPreferences = this.getSharedPreferences("LToken", Context.MODE_PRIVATE); //Inicializamos el SharedPreference
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("Token",token);
+        editor.putString("usuario", Usr);
+        editor.putString("password", Pass);
         //Ya que queremos el proceso se quiere que trabaje en background usaremos apply(Asynchrono). De lo contrario se usaria commit()(synchrono).
         editor.apply();
     }
