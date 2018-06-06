@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public  class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder>{
-        private ArrayList<News> news; //Creamos un arrayList de noticias
+        public ArrayList<News> news; //Creamos un arrayList de noticias
 
         public static class NewsViewHolder extends RecyclerView.ViewHolder {
             CardView card;

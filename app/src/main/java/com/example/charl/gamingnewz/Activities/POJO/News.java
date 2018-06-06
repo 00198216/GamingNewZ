@@ -16,7 +16,7 @@ public class News implements Serializable,Comparable<News> {
     private String coverImage;   //Cover Image del juego. Otra vez, Esta imagen dependerade el dato "game"
     private String createdDate; //Fecha de creacion del juego. Otra vez, Ese dato dependerade el dato "game"
     private String description; //Descripcion del juego. Otra vez, Ese dato dependerade el dato "game"
-    private Boolean checked; // Para revizar si dicha noticia esta en favoritos o no.
+
 
     public News() {  //Constructor vacio
     }
@@ -28,13 +28,6 @@ public class News implements Serializable,Comparable<News> {
         this.subtitulo = subtitulo;
     }
 
-    //Constructor con Check. Final Usage
-    public News(int image, String titulo, String subtitulo,Boolean Checked) {
-        this.image = image;
-        this.titulo = titulo;
-        this.subtitulo = subtitulo;
-        this.checked = Checked;
-    }
 
     public String getId() {
         return id;
@@ -108,13 +101,6 @@ public class News implements Serializable,Comparable<News> {
         this.description = description;
     }
 
-    public Boolean getChecked() {
-        return checked;
-    }
-
-    public void setChecked(Boolean checked) {
-        this.checked = checked;
-    }
 
     //Metodo de comparacion para Comparable<News>
     @Override

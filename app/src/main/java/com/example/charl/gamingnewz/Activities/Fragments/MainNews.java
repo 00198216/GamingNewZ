@@ -94,7 +94,7 @@ public class MainNews extends Fragment {
         rv = vista.findViewById(R.id.recycler);
 
 
-       newz = new ArrayList<>();
+       newz = new ArrayList<News>();
 
 
         gManager = new GridLayoutManager(getActivity(), 2);
@@ -111,18 +111,39 @@ public class MainNews extends Fragment {
 
 
         rv.setLayoutManager(gManager);
-        prepareNews();
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(GamingNewZAPI.FINISH).addConverterFactory(GsonConverterFactory.create(new Gson())).build();
+        GamingNewZAPI GNZAPI = retrofit.create(GamingNewZAPI.class);
+        Call<ArrayList<News>> news = GNZAPI.getNews("Beared " + token);
+        news.enqueue(new Callback<ArrayList<News>>() {
 
 
+            @Override
+            public void onResponse(Call<ArrayList<News>> call, Response<ArrayList<News>> response) {
+                if(response.isSuccessful()){
+                    Toast.makeText(getContext(),"Loading Data....",Toast.LENGTH_SHORT).show();
+
+                    newz =  response.body();
+
+                    adapter = new NewsAdapter(newz);
+
+                    rv.setAdapter(adapter);
+
+                    Toast.makeText(getContext(),response.body().get(13).getTitulo(),Toast.LENGTH_LONG).show();
+                }else {
+                    Toast.makeText(getContext(),"Error al cargar noticias",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),token,Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<News>> call, Throwable t) {
+                Toast.makeText(getContext(),"Error de coneccion",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),token,Toast.LENGTH_LONG).show();
+            }
+        });
 
 
-        adapter = new NewsAdapter(newz);
-
-
-
-
-
-        rv.setAdapter(adapter);
 
 
         return vista;
@@ -168,34 +189,5 @@ public class MainNews extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-        public void prepareNews(){
-            Retrofit retrofit = new Retrofit.Builder().baseUrl(GamingNewZAPI.FINISH).addConverterFactory(GsonConverterFactory.create(new Gson())).build();
-            GamingNewZAPI GNZAPI = retrofit.create(GamingNewZAPI.class);
-            Call<ArrayList<News>> news = GNZAPI.getNews("Beared " + token);
-            news.enqueue(new Callback<ArrayList<News>>() {
 
-
-                @Override
-                public void onResponse(Call<ArrayList<News>> call, Response<ArrayList<News>> response) {
-                    if(response.isSuccessful()){
-                        Toast.makeText(getContext(),"Loading Data....",Toast.LENGTH_SHORT).show();
-
-                        newz = (ArrayList<News>) response.body();
-                        Toast.makeText(getContext(),newz.get(0).getGame(),Toast.LENGTH_LONG).show();
-                    }else {
-                        Toast.makeText(getContext(),"Error al cargar noticias",Toast.LENGTH_LONG).show();
-                        Toast.makeText(getContext(),token,Toast.LENGTH_LONG).show();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ArrayList<News>> call, Throwable t) {
-                    Toast.makeText(getContext(),"Error de coneccion",Toast.LENGTH_LONG).show();
-                    Toast.makeText(getContext(),token,Toast.LENGTH_LONG).show();
-                }
-            });
-
-
-
-        }
 }
