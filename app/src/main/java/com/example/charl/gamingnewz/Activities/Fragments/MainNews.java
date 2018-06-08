@@ -84,7 +84,7 @@ public class MainNews extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View vista = inflater.inflate(R.layout.fragment_main_news, container, false);
+        final View vista = inflater.inflate(R.layout.fragment_main_news, container, false);
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LToken", Context.MODE_PRIVATE);
         token = sharedPreferences.getString("Token","");
@@ -121,7 +121,6 @@ public class MainNews extends Fragment {
             @Override
             public void onResponse(Call<ArrayList<News>> call, Response<ArrayList<News>> response) {
                 if(response.isSuccessful()){
-                    Toast.makeText(getContext(),"Loading Data....",Toast.LENGTH_SHORT).show();
 
                     newz =  response.body();
 
