@@ -1,21 +1,17 @@
-package com.example.charl.gamingnewz.Activities.POJO;
+package com.example.charl.gamingnewz.Activities.Room.Room_Entities_and_Database;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-import java.io.Serializable;
-import java.util.Date;
-
 @Entity(tableName = "News_Table") //El nombre que le daremos a nuestra tabla.
-public class News {
+public class NewsEntity {
 
     @NonNull                   // Para evitar campos nulos
-    @PrimaryKey
-    //(autoGenerate = true) Esto es si hubieramos querido autogenerar cada id. En este caso pues, ya vienen con las noticias
+    @PrimaryKey //(autoGenerate = true) Esto es si hubieramos querido autogenerar cada id. En este caso pues, ya vienen con las noticias
     @ColumnInfo(name = "Id") // Las Ids
-    private String _id;  //Id de la noticia
+    private String id;
 
     //@NonNull Puede que este vacio y no es vital como la primary key
     @ColumnInfo(name = "Title") //Titulo
@@ -28,7 +24,7 @@ public class News {
 
     //@NonNull Puede que este vacio y no es vital como la primary key
     @ColumnInfo(name = "CreatedDate") //Fecha de creacion de la noticia
-    private String created_date;
+    private String createdDate;
 
     //@NonNull Puede que este vacio y no es vital como la primary key
     @ColumnInfo(name = "Description") //Descripcion de la noticia
@@ -42,25 +38,25 @@ public class News {
     @ColumnInfo(name = "Game") //Juego de la noticia
     private String game;
 
-
-    public News() {  //Constructor vacio
-    }
-
-    //Constructor sin Check. For testing purposes.
-    public News(String coverimage, String titulo, String body) {
-        this.coverImage = coverimage;
-        this.title = titulo;
+    //Constructor
+    public NewsEntity(@NonNull String id, String title, String coverImage, String createdDate, String description, String body, String game) {
+        this.id = id;
+        this.title = title;
+        this.coverImage = coverImage;
+        this.createdDate = createdDate;
+        this.description = description;
         this.body = body;
+        this.game = game;
     }
 
+    @NonNull
     public String getId() {
-        return _id;
+        return id;
     }
 
-    public void setId(String _id) {
-        this._id = _id;
+    public void setId(@NonNull String id) {
+        this.id = id;
     }
-
 
     public String getTitle() {
         return title;
@@ -68,6 +64,30 @@ public class News {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getCoverImage() {
+        return coverImage;
+    }
+
+    public void setCoverImage(String coverImage) {
+        this.coverImage = coverImage;
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getBody() {
@@ -85,31 +105,4 @@ public class News {
     public void setGame(String game) {
         this.game = game;
     }
-
-
-    public String getCoverImage() {
-        return coverImage;
-    }
-
-    public void setCoverImage(String coverImage) {
-        this.coverImage = coverImage;
-    }
-
-    public String getCreated_date() {
-        return created_date;
-    }
-
-    public void setCreated_date(String created_date) {
-        this.created_date = created_date;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-
 }

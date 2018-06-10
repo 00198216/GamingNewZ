@@ -1,9 +1,13 @@
 package com.example.charl.gamingnewz.Activities.Fragments;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +19,7 @@ import android.widget.Toast;
 import com.example.charl.gamingnewz.Activities.Adapters.NewsAdapter;
 import com.example.charl.gamingnewz.Activities.Interfaces.GamingNewZAPI;
 import com.example.charl.gamingnewz.Activities.POJO.News;
+import com.example.charl.gamingnewz.Activities.Room.ViewModel.NewsViewModel;
 import com.example.charl.gamingnewz.R;
 import com.google.gson.Gson;
 
@@ -42,8 +47,7 @@ public class MainNews extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     RecyclerView rv;
     NewsAdapter adapter;
-    ArrayList<News> newz;
-    private String token;
+    NewsViewModel NViewModel;
     GridLayoutManager gManager;
 
 
@@ -85,64 +89,31 @@ public class MainNews extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View vista = inflater.inflate(R.layout.fragment_main_news, container, false);
-
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LToken", Context.MODE_PRIVATE);
-        token = sharedPreferences.getString("Token","");
-
-
-
         rv = vista.findViewById(R.id.recycler);
 
 
-       newz = new ArrayList<News>();
-
-
-        gManager = new GridLayoutManager(getActivity(), 2);
-        gManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+        NViewModel = ViewModelProviders.of(this).get(NewsViewModel.class);
+        NViewModel.getAllNews().observe(this, new Observer<List<News>>() {
             @Override
-            public int getSpanSize(int position) {
-                if (position % 3 == 0) {
-                    return 2;
-                } else {
-                    return 1;
-                }
+            public void onChanged(@Nullable List<News> news) {
+                adapter = new NewsAdapter((ArrayList<News>)news);
+                gManager = new GridLayoutManager(getActivity(), 2);
+                gManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                    @Override
+                    public int getSpanSize(int position) {
+                        if (position % 3 == 0) {
+                            return 2;
+                        } else {
+                            return 1;
+                        }
+                    }
+                });
+
+
+                rv.setLayoutManager(gManager);
+                rv.setAdapter(adapter);
             }
         });
-
-
-        rv.setLayoutManager(gManager);
-
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(GamingNewZAPI.FINISH).addConverterFactory(GsonConverterFactory.create(new Gson())).build();
-        GamingNewZAPI GNZAPI = retrofit.create(GamingNewZAPI.class);
-        Call<ArrayList<News>> news = GNZAPI.getNews("Beared " + token);
-        news.enqueue(new Callback<ArrayList<News>>() {
-
-
-            @Override
-            public void onResponse(Call<ArrayList<News>> call, Response<ArrayList<News>> response) {
-                if(response.isSuccessful()){
-
-                    newz =  response.body();
-
-                    adapter = new NewsAdapter(newz);
-
-                    rv.setAdapter(adapter);
-
-                }else {
-                    Toast.makeText(getContext(),"Error al cargar noticias",Toast.LENGTH_LONG).show();
-                    Toast.makeText(getContext(),token,Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<News>> call, Throwable t) {
-                Toast.makeText(getContext(),"Error de coneccion",Toast.LENGTH_LONG).show();
-                Toast.makeText(getContext(),token,Toast.LENGTH_LONG).show();
-            }
-        });
-
-
-
 
         return vista;
     }
