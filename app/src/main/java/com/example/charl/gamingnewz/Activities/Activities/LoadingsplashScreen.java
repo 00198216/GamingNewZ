@@ -30,8 +30,11 @@ public class LoadingsplashScreen extends AppCompatActivity {
         if (TextUtils.isEmpty(SavedLogin.getString("usuario", "")) &&
                 TextUtils.isEmpty(SavedLogin.getString("password", ""))
                 && TextUtils.isEmpty(SavedLogin.getString("Token", ""))) {
+            Login.setFlags(Login.FLAG_ACTIVITY_NEW_TASK | Login.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(Login);
+
         } else {
+            Main.setFlags(Main.FLAG_ACTIVITY_NEW_TASK | Main.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(Main);
         }
     }

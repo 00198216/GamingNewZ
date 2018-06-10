@@ -72,7 +72,7 @@ public class Login extends AppCompatActivity {
                     finish();
                 }
                 else{
-                    Toast.makeText(Login.this,"No response",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this,"Usuario Erroneo",Toast.LENGTH_SHORT).show();
                 }
             }
 
