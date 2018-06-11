@@ -1,6 +1,8 @@
 package com.example.charl.gamingnewz.Activities.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.charl.gamingnewz.Activities.Activities.Login;
+import com.example.charl.gamingnewz.Activities.Activities.MoreInfo;
 import com.example.charl.gamingnewz.Activities.POJO.News;
 import com.example.charl.gamingnewz.R;
 import com.squareup.picasso.Picasso;
@@ -21,6 +25,7 @@ import java.util.List;
 
 public  class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder>{
         public ArrayList<News> news; //Creamos un arrayList de noticias
+         Context Contxt;
 
         public static class NewsViewHolder extends RecyclerView.ViewHolder {
             CardView card;
@@ -47,8 +52,9 @@ public  class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolde
         }
 
         //Constructor
-        public NewsAdapter(ArrayList<News> news) {
+        public NewsAdapter(ArrayList<News> news,Context con) {
             this.news = news;
+            Contxt= con;
         }
 
         @Override
@@ -70,6 +76,47 @@ public  class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolde
             } else {
                 Picasso.with(holder.cxt).load(R.drawable.wdd).error(R.drawable.wdd).into(holder.img);
             }
+
+            //Preparamos para mandar el intent para mostrar las noticias full:
+
+            //En la imagen:
+
+            holder.img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent newIntent = new Intent(Contxt, MoreInfo.class);
+                    Bundle caja = new Bundle();
+                    caja.putSerializable("info",news.get(position));
+                    newIntent.putExtras(caja);
+                    Contxt.startActivity(newIntent);
+                }
+            });
+
+            //En el titulo:
+
+            holder.name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent newIntent = new Intent(Contxt, MoreInfo.class);
+                    Bundle caja = new Bundle();
+                    caja.putSerializable("info", news.get(position));
+                    newIntent.putExtras(caja);
+                    Contxt.startActivity(newIntent);
+                }
+            });
+
+            //En el body:
+
+            holder.Sname.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent newIntent = new Intent(Contxt, MoreInfo.class);
+                    Bundle caja = new Bundle();
+                    caja.putSerializable("info",news.get(position));
+                    newIntent.putExtras(caja);
+                    Contxt.startActivity(newIntent);
+                }
+            });
 
 
         }

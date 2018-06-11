@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity(tableName = "News_Table") //El nombre que le daremos a nuestra tabla.
-public class News {
+public class News implements Serializable{
 
     @NonNull                   // Para evitar campos nulos
     @PrimaryKey

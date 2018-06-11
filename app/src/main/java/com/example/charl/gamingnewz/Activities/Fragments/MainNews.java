@@ -96,7 +96,7 @@ public class MainNews extends Fragment {
         NViewModel.getAllNews().observe(this, new Observer<List<News>>() {
             @Override
             public void onChanged(@Nullable List<News> news) {
-                adapter = new NewsAdapter((ArrayList<News>)news);
+                adapter = new NewsAdapter((ArrayList<News>)news,getContext());
                 gManager = new GridLayoutManager(getActivity(), 2);
                 gManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                     @Override
