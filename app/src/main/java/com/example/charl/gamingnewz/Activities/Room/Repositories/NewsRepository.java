@@ -16,6 +16,7 @@ import com.example.charl.gamingnewz.Activities.Room.Room_Entities_and_Database.N
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -104,6 +105,7 @@ public class NewsRepository {
                     if(response.isSuccessful()){
 
                         ArrayList<News> newz =(ArrayList<News>) response.body();
+                        Collections.reverse(newz); // Por este medio le damos vuelta a la lista de mas nuevo a mas viejo.
                         new AsyncTaskI(newsDao).execute(newz);
 
                     }else {

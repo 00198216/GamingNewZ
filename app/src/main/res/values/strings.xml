@@ -32,6 +32,12 @@
     <string name="opciones">Opciones</string>
     <string name="logout">Logout</string>
     <string name="welcome">Welcome!</string>
+    <string name="titulo">Titulo</string>
+    <string name="fecha">Fecha</string>
+    <string name="fecha_noticia">Fecha Noticia</string>
+    <string name="juego">Juego</string>
+    <string name="descripcion">Descripcion</string>
+    <string name="body">body</string>
 
 
 </resources>

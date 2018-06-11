@@ -67,7 +67,7 @@ public  class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolde
         public void onBindViewHolder(@NonNull NewsViewHolder holder, final int position){
 
             holder.name.setText(news.get(position).getTitle());//Holder para el nombre
-            holder.Sname.setText(news.get(position).getBody()); //Holder para el subtitulo
+            holder.Sname.setText(news.get(position).getDescription()); //Holder para el subtitulo
 
             //Cargando la imagen via Picasso
             if (!(news.get(position).getCoverImage() == null) &&

@@ -1,0 +1,11 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Gradient usado en el header de la app -->
+    <gradient
+        android:angle="135"
+        android:centerColor="#1A237E"
+        android:endColor="#0D47A1"
+        android:startColor="#0D47A1"
+        android:type="linear" />
+</shape>

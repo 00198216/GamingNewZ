@@ -1,7 +1,9 @@
 package com.example.charl.gamingnewz.Activities.Activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.net.Uri;
@@ -18,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.charl.gamingnewz.Activities.Fragments.MainNews;
 import com.example.charl.gamingnewz.R;
@@ -30,7 +33,11 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+
+
         setSupportActionBar(toolbar);
+
 
         getSupportFragmentManager().beginTransaction().replace(R.id.content,new MainNews()).commit();
 

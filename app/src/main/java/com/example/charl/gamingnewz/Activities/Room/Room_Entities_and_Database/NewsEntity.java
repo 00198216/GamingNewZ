@@ -5,13 +5,16 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
+
+//Esta Actividad hiba ser la que llamaba la Api hasta que decidi quedarme con el POJO para eso,
+
 @Entity(tableName = "News_Table") //El nombre que le daremos a nuestra tabla.
 public class NewsEntity {
 
     @NonNull                   // Para evitar campos nulos
     @PrimaryKey //(autoGenerate = true) Esto es si hubieramos querido autogenerar cada id. En este caso pues, ya vienen con las noticias
     @ColumnInfo(name = "Id") // Las Ids
-    private String id;
+    private String _id;
 
     //@NonNull Puede que este vacio y no es vital como la primary key
     @ColumnInfo(name = "Title") //Titulo
@@ -24,7 +27,7 @@ public class NewsEntity {
 
     //@NonNull Puede que este vacio y no es vital como la primary key
     @ColumnInfo(name = "CreatedDate") //Fecha de creacion de la noticia
-    private String createdDate;
+    private String created_date;
 
     //@NonNull Puede que este vacio y no es vital como la primary key
     @ColumnInfo(name = "Description") //Descripcion de la noticia
@@ -39,11 +42,11 @@ public class NewsEntity {
     private String game;
 
     //Constructor
-    public NewsEntity(@NonNull String id, String title, String coverImage, String createdDate, String description, String body, String game) {
-        this.id = id;
+    public NewsEntity(@NonNull String _id, String title, String coverImage, String created_date, String description, String body, String game) {
+        this._id = _id;
         this.title = title;
         this.coverImage = coverImage;
-        this.createdDate = createdDate;
+        this.created_date = created_date;
         this.description = description;
         this.body = body;
         this.game = game;
@@ -51,11 +54,11 @@ public class NewsEntity {
 
     @NonNull
     public String getId() {
-        return id;
+        return _id;
     }
 
-    public void setId(@NonNull String id) {
-        this.id = id;
+    public void setId(@NonNull String _id) {
+        this._id = _id;
     }
 
     public String getTitle() {
@@ -75,11 +78,11 @@ public class NewsEntity {
     }
 
     public String getCreatedDate() {
-        return createdDate;
+        return created_date;
     }
 
     public void setCreatedDate(String createdDate) {
-        this.createdDate = createdDate;
+        this.created_date = createdDate;
     }
 
     public String getDescription() {
