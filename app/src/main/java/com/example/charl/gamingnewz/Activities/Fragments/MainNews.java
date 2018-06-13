@@ -1,5 +1,6 @@
 package com.example.charl.gamingnewz.Activities.Fragments;
 
+import android.annotation.SuppressLint;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProviders;
@@ -49,6 +50,8 @@ public class MainNews extends Fragment {
     NewsAdapter adapter;
     NewsViewModel NViewModel;
     GridLayoutManager gManager;
+    public int valor;
+
 
 
     // TODO: Rename and change types of parameters
@@ -61,21 +64,17 @@ public class MainNews extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MainNews.
-     */
+    public MainNews(int p) {
+        valor = p;
+    }
+
+
+
+
     // TODO: Rename and change types and number of parameters
-    public static MainNews newInstance(String param1, String param2) {
+    public static MainNews newInstance(int p) {
         MainNews fragment = new MainNews();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+
         return fragment;
     }
 

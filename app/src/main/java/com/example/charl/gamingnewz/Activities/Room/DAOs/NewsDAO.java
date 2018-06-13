@@ -22,7 +22,7 @@ public interface NewsDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertNews(News... news);
 
-    @Query("SELECT * FROM News_Table")
+    @Query("SELECT * FROM News_Table ORDER BY CreatedDate DESC")
     LiveData<List<News>> getAllNews();  //Livedata permite que este objeto sea Observado.
 
 }

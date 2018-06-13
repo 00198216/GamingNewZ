@@ -105,7 +105,7 @@ public class NewsRepository {
                     if(response.isSuccessful()){
 
                         ArrayList<News> newz =(ArrayList<News>) response.body();
-                        Collections.reverse(newz); // Por este medio le damos vuelta a la lista de mas nuevo a mas viejo.
+                        //Collections.reverse(newz); // Por este medio le damos vuelta a la lista de mas nuevo a mas viejo.
                         new AsyncTaskI(newsDao).execute(newz);
 
                     }else {

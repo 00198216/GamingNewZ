@@ -8,6 +8,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -21,12 +22,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.charl.gamingnewz.Activities.Fragments.MainNews;
+import com.example.charl.gamingnewz.Activities.Fragments.TabbedFragment;
 import com.example.charl.gamingnewz.R;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener , MainNews.OnFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener , MainNews.OnFragmentInteractionListener,TabbedFragment.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +90,7 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
 
         Fragment f = null;
@@ -99,9 +102,14 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.news) {
 
             f= new MainNews();
+           // String Hola =(String) item.getTitle();
+           // Toast.makeText(MainActivity.this,Hola,Toast.LENGTH_SHORT).show();
             state= true;
 
         } else if (id == R.id.games1) {
+
+            f= new TabbedFragment();
+            state= true;
 
         } else if (id == R.id.settings) {
 
