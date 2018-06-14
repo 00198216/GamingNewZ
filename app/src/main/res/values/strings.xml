@@ -41,6 +41,8 @@
     <string name="noticias_principales">Noticias Principales</string>
     <string name="top_jugadores">Top Jugadores</string>
     <string name="imagenes">Imagenes</string>
+    <string name="name">name</string>
+    <string name="biography">biography</string>
 
 
 </resources>

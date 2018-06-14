@@ -5,7 +5,9 @@ import android.arch.lifecycle.LiveData;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
+import com.example.charl.gamingnewz.Activities.Activities.Login;
 import com.example.charl.gamingnewz.Activities.Interfaces.GamingNewZAPI;
 import com.example.charl.gamingnewz.Activities.POJO.Players;
 import com.example.charl.gamingnewz.Activities.Room.DAOs.PlayersDAO;
@@ -75,6 +77,7 @@ public class PlayersRepository {
             ArrayList<Players> Not = arrayLists[0]; //Nos vamos a la posicion 0
             for (int e = 0; e < Not.size(); e++) {
                 Players players = Not.get(e); //Vamos una por una
+
                 playerDAO.insertPlayer(players);
             }
             return null;

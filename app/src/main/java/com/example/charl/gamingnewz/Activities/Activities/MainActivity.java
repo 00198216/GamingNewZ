@@ -25,11 +25,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.charl.gamingnewz.Activities.Fragments.MainNews;
+import com.example.charl.gamingnewz.Activities.Fragments.PlayerFragment;
 import com.example.charl.gamingnewz.Activities.Fragments.TabbedFragment;
 import com.example.charl.gamingnewz.R;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener , MainNews.OnFragmentInteractionListener,TabbedFragment.OnFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener , MainNews.OnFragmentInteractionListener,TabbedFragment.OnFragmentInteractionListener,PlayerFragment.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
