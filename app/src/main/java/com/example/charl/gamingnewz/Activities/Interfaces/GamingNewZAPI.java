@@ -1,6 +1,7 @@
 package com.example.charl.gamingnewz.Activities.Interfaces;
 
 import com.example.charl.gamingnewz.Activities.POJO.News;
+import com.example.charl.gamingnewz.Activities.POJO.Players;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,4 +27,8 @@ public interface GamingNewZAPI {
     @POST("/login")
     Call<String> login(@Field("user") String username, @Field("password") String password);
     //                 El field de usuario              El field de password       Ambos van en String.
+
+    @GET("/players")
+    Call<ArrayList<Players>> getPlayers(@Header("Authorization") String authorization);
 }
+
