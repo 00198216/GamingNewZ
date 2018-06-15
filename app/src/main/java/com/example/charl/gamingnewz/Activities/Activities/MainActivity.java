@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener , MainNews.OnFragmentInteractionListener,TabbedFragment.OnFragmentInteractionListener,PlayerFragment.OnFragmentInteractionListener, PictureFragment.OnFragmentInteractionListener{
 
    public static Boolean flag = true;
+   private TextView name;
+   private String Usr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,10 @@ public class MainActivity extends AppCompatActivity
             flag= false;
         }
 
+        name= findViewById(R.id.UsrW);
+        SharedPreferences sharedPref = getSharedPreferences("LToken",Context.MODE_PRIVATE);
+        Usr = sharedPref.getString("usuario","");
+        name.setText(Usr);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

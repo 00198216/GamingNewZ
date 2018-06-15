@@ -45,6 +45,8 @@
     <string name="biography">biography</string>
     <string name="overwatch">Overwatch</string>
     <string name="fifa">fifa</string>
+    <string name="welcomep">Welcome Back!</string>
+    <string name="userp">User</string>
 
 
 </resources>
