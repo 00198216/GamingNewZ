@@ -3,19 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.Fragments.MainNews"
-    android:background="@drawable/side_nav_bar"
-    android:id="@+id/Mn">
+    tools:context=".Activities.Fragments.PictureFragment"
+    android:id="@+id/Phothoz"
+    android:background="@drawable/side_nav_bar">
 
     <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_marginTop="45dp"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/recycler"
-        android:fitsSystemWindows="true"
+        android:id="@+id/recycler3"
         android:scrollbars="vertical">
 
     </android.support.v7.widget.RecyclerView>
+
 
 </FrameLayout>

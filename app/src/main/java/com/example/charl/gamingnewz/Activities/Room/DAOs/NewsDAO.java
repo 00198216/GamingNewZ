@@ -7,6 +7,7 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
 import com.example.charl.gamingnewz.Activities.POJO.News;
+import com.example.charl.gamingnewz.Activities.POJO.Players;
 import com.example.charl.gamingnewz.Activities.Room.Room_Entities_and_Database.NewsEntity;
 
 import java.util.List;
@@ -25,4 +26,14 @@ public interface NewsDAO {
     @Query("SELECT * FROM News_Table ORDER BY CreatedDate DESC")
     LiveData<List<News>> getAllNews();  //Livedata permite que este objeto sea Observado.
 
+    @Query("SELECT * FROM News_Table WHERE Game like '%lol%' ")
+    LiveData<List<News>> getLolNews();  //Livedata permite que este objeto sea Observado.
+
+    @Query("SELECT * FROM News_Table WHERE Game like '%overwatch%' ")
+    LiveData<List<News>> getOverNews();  //Livedata permite que este objeto sea Observado.
+
+    @Query("SELECT * FROM News_Table WHERE Game like '%csgo%' ")
+    LiveData<List<News>> getCsgoNews();  //Livedata permite que este objeto sea Observado.
 }
+
+

@@ -25,12 +25,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.charl.gamingnewz.Activities.Fragments.MainNews;
+import com.example.charl.gamingnewz.Activities.Fragments.PictureFragment;
 import com.example.charl.gamingnewz.Activities.Fragments.PlayerFragment;
 import com.example.charl.gamingnewz.Activities.Fragments.TabbedFragment;
 import com.example.charl.gamingnewz.R;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener , MainNews.OnFragmentInteractionListener,TabbedFragment.OnFragmentInteractionListener,PlayerFragment.OnFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener , MainNews.OnFragmentInteractionListener,TabbedFragment.OnFragmentInteractionListener,PlayerFragment.OnFragmentInteractionListener, PictureFragment.OnFragmentInteractionListener{
+
+    private static Boolean flag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +41,12 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-
-
         setSupportActionBar(toolbar);
 
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.content,new MainNews()).commit();
+        if(flag) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.content, new MainNews()).commit();
+            flag= false;
+        }
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -112,7 +115,22 @@ public class MainActivity extends AppCompatActivity
             f= new TabbedFragment();
             state= true;
 
-        } else if (id == R.id.settings) {
+        } else if (id == R.id.games2) {
+
+            f= new TabbedFragment();
+            state= true;
+
+        }else if (id == R.id.games3) {
+
+            f= new TabbedFragment();
+            state= true;
+
+        } /*else if (id == R.id.games4) {
+
+            f= new TabbedFragment();
+            state= true;
+
+        }*/ else if (id == R.id.settings) {
 
             Intent intent = new Intent(getApplicationContext(), Settings.class);
             startActivity(intent);

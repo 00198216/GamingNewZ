@@ -32,12 +32,6 @@ public class Players implements Serializable {
 
     }
 
-    public Players( String name, String biografia, String avatar, String game) {
-        this.name = name;
-        this.biografia = biografia;
-        this.avatar = avatar;
-        this.game = game;
-    }
 
     @NonNull
     public String get_id() {

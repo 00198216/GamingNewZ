@@ -27,7 +27,7 @@
         <item
             android:id="@+id/games2"
             android:icon="@drawable/ic_stars_black_24dp"
-            android:title="@string/games2"
+            android:title="@string/overwatch"
             android:color="@android:color/white"/>
 
         <item
@@ -35,6 +35,12 @@
             android:icon="@drawable/ic_stars_black_24dp"
             android:title="@string/games3"
             android:color="@android:color/white"/>
+            <!--
+           <item
+               android:id="@+id/games4"
+               android:icon="@drawable/ic_stars_black_24dp"
+               android:title="@string/fifa"
+               android:color="@android:color/white"/>  -->
 
         </menu>
         </item>

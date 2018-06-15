@@ -23,7 +23,7 @@ import com.example.charl.gamingnewz.R;
  * Use the {@link TabbedFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TabbedFragment extends Fragment implements MainNews.OnFragmentInteractionListener, PlayerFragment.OnFragmentInteractionListener{
+public class TabbedFragment extends Fragment implements MainNews.OnFragmentInteractionListener, PlayerFragment.OnFragmentInteractionListener, PictureFragment.OnFragmentInteractionListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -158,7 +158,7 @@ public class TabbedFragment extends Fragment implements MainNews.OnFragmentInter
                     fragment = new PlayerFragment(N);
                     break;
                 case 3:
-                    fragment = new MainNews(N);
+                    fragment = new PictureFragment(N);
                     break;
             }
             return fragment;

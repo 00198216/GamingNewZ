@@ -30,7 +30,7 @@ public class PlayersRepository {
     private LiveData<List<Players>> OverPlayers;
     private LiveData<List<Players>> CsgoPlayers;
     private String UsrToken;
-    private Context ctx;
+    public Context ctx;
 
     public PlayersRepository(Application application) { //Application es para Viewmodel.
 
@@ -91,6 +91,7 @@ public class PlayersRepository {
 
         private String UsrToken;
         private PlayersDAO playerDao;
+        public static String code;
 
         public GtPlayers(String UsrToken, PlayersDAO playerDao) {
             this.UsrToken = UsrToken;
@@ -98,8 +99,15 @@ public class PlayersRepository {
         }
 
 
+        public static String  GetCode(){
+            return code;
+        }
+
+
+
         @Override
         protected Void doInBackground(Void... voids) {
+
             Retrofit retrofit = new Retrofit.Builder().baseUrl(GamingNewZAPI.FINISH).addConverterFactory(GsonConverterFactory.create(new Gson())).build();
             GamingNewZAPI GNZAPI = retrofit.create(GamingNewZAPI.class);
 
@@ -111,19 +119,22 @@ public class PlayersRepository {
                 @Override
                 public void onResponse(Call<ArrayList<Players>> call, Response<ArrayList<Players>> response) {
                     if (response.isSuccessful()) {
-
+                        code= response.code()+"";
+                        System.out.println(response.code()+"");
                         ArrayList<Players> newz = (ArrayList<Players>) response.body();
                         //Collections.reverse(newz); // Por este medio le damos vuelta a la lista de mas nuevo a mas viejo.
                         new AsyncTaskI(playerDao).execute(newz);
 
                     } else {
-                        System.out.println("Error al cargar noticias");
+                        code= response.code()+"";
+                        System.out.println(response.code()+"");
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ArrayList<Players>> call, Throwable t) {
-                    System.out.println("Error de connexion");
+                    code= t.getMessage()+"";
+                    System.out.println(t.getMessage()+"");
                 }
             });
             return null;

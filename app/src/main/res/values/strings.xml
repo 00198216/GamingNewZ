@@ -43,6 +43,8 @@
     <string name="imagenes">Imagenes</string>
     <string name="name">name</string>
     <string name="biography">biography</string>
+    <string name="overwatch">Overwatch</string>
+    <string name="fifa">fifa</string>
 
 
 </resources>

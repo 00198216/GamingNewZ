@@ -33,7 +33,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activities.Activities.MoreInfo" />
-        <activity android:name=".Activities.Cardview.PlayerCardView"></activity>
+        <activity android:name=".Activities.Cardview.PlayerCardView" />
+        <activity android:name=".Activities.Cardview.PictureCardView"></activity>
     </application>
 
 </manifest>

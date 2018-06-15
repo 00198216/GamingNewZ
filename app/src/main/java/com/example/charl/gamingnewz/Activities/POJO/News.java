@@ -46,13 +46,6 @@ public class News implements Serializable{
     public News() {  //Constructor vacio
     }
 
-    //Constructor sin Check. For testing purposes.
-    public News(String coverimage, String titulo, String body) {
-        this.coverImage = coverimage;
-        this.title = titulo;
-        this.body = body;
-    }
-
     public String getId() {
         return _id;
     }

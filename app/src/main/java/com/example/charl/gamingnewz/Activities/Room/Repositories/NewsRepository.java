@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.example.charl.gamingnewz.Activities.Adapters.NewsAdapter;
 import com.example.charl.gamingnewz.Activities.Interfaces.GamingNewZAPI;
 import com.example.charl.gamingnewz.Activities.POJO.News;
+import com.example.charl.gamingnewz.Activities.POJO.Players;
 import com.example.charl.gamingnewz.Activities.Room.DAOs.NewsDAO;
 import com.example.charl.gamingnewz.Activities.Room.Room_Entities_and_Database.GamingNewZDatatbase;
 import com.example.charl.gamingnewz.Activities.Room.Room_Entities_and_Database.NewsEntity;
@@ -29,6 +30,9 @@ public class NewsRepository {
 
     private NewsDAO newsDao;  //El DAO
     private LiveData<List<News>> list;   // La lista donde recibiremos los datos
+    private LiveData<List<News>> LolNews;   // La lista donde recibiremos los datos
+    private LiveData<List<News>> OverNews;
+    private LiveData<List<News>> CsgoNews;
     private String UsrToken;
     private Context ctx;
 
@@ -45,6 +49,21 @@ public class NewsRepository {
 
         ConsumeNews();
         list= newsDao.getAllNews();
+        LolNews = newsDao.getLolNews();
+        OverNews = newsDao.getOverNews();
+        CsgoNews = newsDao.getCsgoNews();
+    }
+
+    public LiveData<List<News>> getLolNews() {
+        return LolNews;
+    }
+
+    public LiveData<List<News>> getOverNews() {
+        return OverNews;
+    }
+
+    public LiveData<List<News>> getCsgoNews() {
+        return CsgoNews;
     }
 
 
@@ -104,12 +123,13 @@ public class NewsRepository {
                 public void onResponse(Call<ArrayList<News>> call, Response<ArrayList<News>> response) {
                     if(response.isSuccessful()){
 
+                        System.out.println(response.code()+"");
                         ArrayList<News> newz =(ArrayList<News>) response.body();
                         //Collections.reverse(newz); // Por este medio le damos vuelta a la lista de mas nuevo a mas viejo.
                         new AsyncTaskI(newsDao).execute(newz);
 
                     }else {
-                        System.out.println("Error al cargar noticias");
+                        System.out.println(response.code()+"");
                     }
                 }
 
