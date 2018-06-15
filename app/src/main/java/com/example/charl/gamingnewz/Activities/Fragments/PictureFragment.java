@@ -3,6 +3,7 @@ package com.example.charl.gamingnewz.Activities.Fragments;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -40,6 +41,7 @@ public class PictureFragment extends Fragment {
     NewsViewModel NViewModel;
     GridLayoutManager gManager;
     public int valor;
+    private String Game;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -76,21 +78,58 @@ public class PictureFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View vista = inflater.inflate(R.layout.fragment_picture, container, false);
+
+
+        SharedPreferences sharedPref = getContext().getSharedPreferences("Game",Context.MODE_PRIVATE);
+        Game = sharedPref.getString("Games","");
+
         rv = vista.findViewById(R.id.recycler3);
 
 
-        NViewModel = ViewModelProviders.of(this).get(NewsViewModel.class);
-        NViewModel.getLolNews().observe(this, new Observer<List<News>>() {
-            @Override
-            public void onChanged(@Nullable List<News> news) {
-                adapter = new PictureAdapter((ArrayList<News>)news,getContext());
-                gManager = new GridLayoutManager(getActivity(), 3);
+        if(Game.contains("League of Legends") ) {
+            NViewModel = ViewModelProviders.of(this).get(NewsViewModel.class);
+            NViewModel.getLolNews().observe(this, new Observer<List<News>>() {
+                @Override
+                public void onChanged(@Nullable List<News> news) {
+                    adapter = new PictureAdapter((ArrayList<News>) news, getContext());
+                    gManager = new GridLayoutManager(getActivity(), 3);
 
 
-                rv.setLayoutManager(gManager);
-                rv.setAdapter(adapter);
-            }
-        });
+                    rv.setLayoutManager(gManager);
+                    rv.setAdapter(adapter);
+                }
+            });
+        }
+
+        if(Game.contains("Overwatch") ) {
+            NViewModel = ViewModelProviders.of(this).get(NewsViewModel.class);
+            NViewModel.getOverNews().observe(this, new Observer<List<News>>() {
+                @Override
+                public void onChanged(@Nullable List<News> news) {
+                    adapter = new PictureAdapter((ArrayList<News>) news, getContext());
+                    gManager = new GridLayoutManager(getActivity(), 3);
+
+
+                    rv.setLayoutManager(gManager);
+                    rv.setAdapter(adapter);
+                }
+            });
+        }
+
+        if(Game.contains("CSGO") ) {
+            NViewModel = ViewModelProviders.of(this).get(NewsViewModel.class);
+            NViewModel.getCsgoNews().observe(this, new Observer<List<News>>() {
+                @Override
+                public void onChanged(@Nullable List<News> news) {
+                    adapter = new PictureAdapter((ArrayList<News>) news, getContext());
+                    gManager = new GridLayoutManager(getActivity(), 3);
+
+
+                    rv.setLayoutManager(gManager);
+                    rv.setAdapter(adapter);
+                }
+            });
+        }
 
         return vista;
     }
