@@ -33,7 +33,7 @@ import com.example.charl.gamingnewz.R;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener , MainNews.OnFragmentInteractionListener,TabbedFragment.OnFragmentInteractionListener,PlayerFragment.OnFragmentInteractionListener, PictureFragment.OnFragmentInteractionListener{
 
-    private static Boolean flag = true;
+   public static Boolean flag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +45,15 @@ public class MainActivity extends AppCompatActivity
 
         if(flag) {
             getSupportFragmentManager().beginTransaction().replace(R.id.content, new MainNews()).commit();
+
+            SharedPreferences sharedPreferences = this.getSharedPreferences("Game", Context.MODE_PRIVATE); //Inicializamos el SharedPreference
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("Games","Ultimas Noticias");
+            editor.apply();
+
             flag= false;
         }
 
-        SharedPreferences sharedPreferences = this.getSharedPreferences("Game", Context.MODE_PRIVATE); //Inicializamos el SharedPreference
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("Games","Ultimas Noticias");
-        editor.apply();
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

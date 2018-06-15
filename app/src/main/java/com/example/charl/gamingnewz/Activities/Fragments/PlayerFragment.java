@@ -3,6 +3,7 @@ package com.example.charl.gamingnewz.Activities.Fragments;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -43,6 +44,7 @@ public class PlayerFragment extends Fragment {
     PlayersViewModel NViewModel;
     LinearLayoutManager LManager;
     public int valor;
+    private String  Game;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -81,14 +83,17 @@ public class PlayerFragment extends Fragment {
             final View vista = inflater.inflate(R.layout.fragment_player, container, false);
             rv = vista.findViewById(R.id.recycler2);
 
+        SharedPreferences sharedPref = getContext().getSharedPreferences("Game",Context.MODE_PRIVATE);
+        Game = sharedPref.getString("Games","");
 
+        if(Game.contains("League of Legends") ) {
             NViewModel = ViewModelProviders.of(this).get(PlayersViewModel.class);
             NViewModel.getLolPlayers().observe(this, new Observer<List<Players>>() {
 
 
                 @Override
                 public void onChanged(@Nullable List<Players> players) {
-                    adapter = new JugadoresAdapter((ArrayList<Players>)players,getContext());
+                    adapter = new JugadoresAdapter((ArrayList<Players>) players, getContext());
                     LManager = new LinearLayoutManager(getActivity());
 
 
@@ -96,6 +101,42 @@ public class PlayerFragment extends Fragment {
                     rv.setAdapter(adapter);
                 }
             });
+        }
+
+        if(Game.contains("Overwatch") ) {
+            NViewModel = ViewModelProviders.of(this).get(PlayersViewModel.class);
+            NViewModel.getOverPlayers().observe(this, new Observer<List<Players>>() {
+
+
+                @Override
+                public void onChanged(@Nullable List<Players> players) {
+                    adapter = new JugadoresAdapter((ArrayList<Players>) players, getContext());
+                    LManager = new LinearLayoutManager(getActivity());
+
+
+                    rv.setLayoutManager(LManager);
+                    rv.setAdapter(adapter);
+                }
+            });
+        }
+
+
+        if(Game.contains("CSGO") ) {
+            NViewModel = ViewModelProviders.of(this).get(PlayersViewModel.class);
+            NViewModel.getCsgoPlayers().observe(this, new Observer<List<Players>>() {
+
+
+                @Override
+                public void onChanged(@Nullable List<Players> players) {
+                    adapter = new JugadoresAdapter((ArrayList<Players>) players, getContext());
+                    LManager = new LinearLayoutManager(getActivity());
+
+
+                    rv.setLayoutManager(LManager);
+                    rv.setAdapter(adapter);
+                }
+            });
+        }
 
             return vista;
     }

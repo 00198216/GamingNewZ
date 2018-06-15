@@ -94,7 +94,6 @@ public class MainNews extends Fragment {
         SharedPreferences sharedPref = getContext().getSharedPreferences("Game",Context.MODE_PRIVATE);
         Game = sharedPref.getString("Games","");
 
-        Toast.makeText(getContext(),Game,Toast.LENGTH_SHORT).show();
 
         rv = vista.findViewById(R.id.recycler);
 
