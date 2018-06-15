@@ -48,6 +48,11 @@ public class MainActivity extends AppCompatActivity
             flag= false;
         }
 
+        SharedPreferences sharedPreferences = this.getSharedPreferences("Game", Context.MODE_PRIVATE); //Inicializamos el SharedPreference
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("Games","Ultimas Noticias");
+        editor.apply();
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -101,33 +106,48 @@ public class MainActivity extends AppCompatActivity
 
         boolean state =false;
 
+        SharedPreferences Game = getSharedPreferences("Game", Context.MODE_PRIVATE);
+
         int id = item.getItemId();
 
         if (id == R.id.news) {
 
             f= new MainNews();
-           // String Hola =(String) item.getTitle();
-           // Toast.makeText(MainActivity.this,Hola,Toast.LENGTH_SHORT).show();
+
+            Game.edit().putString("Games",(String) item.getTitle()).apply();
+
             state= true;
 
         } else if (id == R.id.games1) {
 
             f= new TabbedFragment();
+
+            Game.edit().putString("Games",(String) item.getTitle()).apply();
+
             state= true;
 
         } else if (id == R.id.games2) {
 
             f= new TabbedFragment();
+
+            Game.edit().putString("Games",(String) item.getTitle()).apply();
             state= true;
+
 
         }else if (id == R.id.games3) {
 
             f= new TabbedFragment();
+
+            Game.edit().putString("Games",(String) item.getTitle()).apply();
             state= true;
+
 
         } /*else if (id == R.id.games4) {
 
             f= new TabbedFragment();
+
+            Game.edit().putString("Games",(String) item.getTitle()).apply();
+
             state= true;
 
         }*/ else if (id == R.id.settings) {

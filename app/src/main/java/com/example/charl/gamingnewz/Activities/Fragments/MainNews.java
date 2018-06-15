@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.charl.gamingnewz.Activities.Activities.Login;
 import com.example.charl.gamingnewz.Activities.Adapters.NewsAdapter;
 import com.example.charl.gamingnewz.Activities.Interfaces.GamingNewZAPI;
 import com.example.charl.gamingnewz.Activities.POJO.News;
@@ -51,6 +52,7 @@ public class MainNews extends Fragment {
     NewsViewModel NViewModel;
     GridLayoutManager gManager;
     public int valor;
+    private String  Game;
 
 
 
@@ -88,31 +90,116 @@ public class MainNews extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View vista = inflater.inflate(R.layout.fragment_main_news, container, false);
+
+        SharedPreferences sharedPref = getContext().getSharedPreferences("Game",Context.MODE_PRIVATE);
+        Game = sharedPref.getString("Games","");
+
+        Toast.makeText(getContext(),Game,Toast.LENGTH_SHORT).show();
+
         rv = vista.findViewById(R.id.recycler);
 
 
-        NViewModel = ViewModelProviders.of(this).get(NewsViewModel.class);
-        NViewModel.getAllNews().observe(this, new Observer<List<News>>() {
-            @Override
-            public void onChanged(@Nullable List<News> news) {
-                adapter = new NewsAdapter((ArrayList<News>)news,getContext());
-                gManager = new GridLayoutManager(getActivity(), 2);
-                gManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                    @Override
-                    public int getSpanSize(int position) {
-                        if (position % 3 == 0) {
-                            return 2;
-                        } else {
-                            return 1;
+        if(Game.contains("Ultimas Noticias") ) {
+            NViewModel = ViewModelProviders.of(this).get(NewsViewModel.class);
+            NViewModel.getAllNews().observe(this, new Observer<List<News>>() {
+                @Override
+                public void onChanged(@Nullable List<News> news) {
+                    adapter = new NewsAdapter((ArrayList<News>) news, getContext());
+                    gManager = new GridLayoutManager(getActivity(), 2);
+                    gManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                        @Override
+                        public int getSpanSize(int position) {
+                            if (position % 3 == 0) {
+                                return 2;
+                            } else {
+                                return 1;
+                            }
                         }
-                    }
-                });
+                    });
 
 
-                rv.setLayoutManager(gManager);
-                rv.setAdapter(adapter);
-            }
-        });
+                    rv.setLayoutManager(gManager);
+                    rv.setAdapter(adapter);
+                }
+            });
+        }
+
+        if(Game.contains("League of Legends") ) {
+            NViewModel = ViewModelProviders.of(this).get(NewsViewModel.class);
+            NViewModel.getLolNews().observe(this, new Observer<List<News>>() {
+                @Override
+                public void onChanged(@Nullable List<News> news) {
+                    adapter = new NewsAdapter((ArrayList<News>) news, getContext());
+                    gManager = new GridLayoutManager(getActivity(), 2);
+                    gManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                        @Override
+                        public int getSpanSize(int position) {
+                            if (position % 3 == 0) {
+                                return 2;
+                            } else {
+                                return 1;
+                            }
+                        }
+                    });
+
+
+                    rv.setLayoutManager(gManager);
+                    rv.setAdapter(adapter);
+                }
+            });
+        }
+
+        if(Game.contains("Overwatch") ) {
+            NViewModel = ViewModelProviders.of(this).get(NewsViewModel.class);
+            NViewModel.getOverNews().observe(this, new Observer<List<News>>() {
+                @Override
+                public void onChanged(@Nullable List<News> news) {
+                    adapter = new NewsAdapter((ArrayList<News>) news, getContext());
+                    gManager = new GridLayoutManager(getActivity(), 2);
+                    gManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                        @Override
+                        public int getSpanSize(int position) {
+                            if (position % 3 == 0) {
+                                return 2;
+                            } else {
+                                return 1;
+                            }
+                        }
+                    });
+
+
+                    rv.setLayoutManager(gManager);
+                    rv.setAdapter(adapter);
+                }
+            });
+        }
+
+        if(Game.contains("CSGO") ) {
+            NViewModel = ViewModelProviders.of(this).get(NewsViewModel.class);
+            NViewModel.getCsgoNews().observe(this, new Observer<List<News>>() {
+                @Override
+                public void onChanged(@Nullable List<News> news) {
+                    adapter = new NewsAdapter((ArrayList<News>) news, getContext());
+                    gManager = new GridLayoutManager(getActivity(), 2);
+                    gManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                        @Override
+                        public int getSpanSize(int position) {
+                            if (position % 3 == 0) {
+                                return 2;
+                            } else {
+                                return 1;
+                            }
+                        }
+                    });
+
+
+                    rv.setLayoutManager(gManager);
+                    rv.setAdapter(adapter);
+                }
+            });
+        }
+
+
 
         return vista;
     }
