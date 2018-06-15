@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         if(flag) {
+            //Para solo cargarlo una vez
+            
             getSupportFragmentManager().beginTransaction().replace(R.id.content, new MainNews()).commit();
 
             SharedPreferences sharedPreferences = this.getSharedPreferences("Game", Context.MODE_PRIVATE); //Inicializamos el SharedPreference
