@@ -1,6 +1,8 @@
 package com.example.charl.gamingnewz.Activities.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.charl.gamingnewz.Activities.Activities.MoreInfo;
+import com.example.charl.gamingnewz.Activities.Activities.MoreInfoPlayers;
 import com.example.charl.gamingnewz.Activities.POJO.Players;
 import com.example.charl.gamingnewz.R;
 import com.squareup.picasso.Picasso;
@@ -55,7 +59,7 @@ public class JugadoresAdapter extends RecyclerView.Adapter<JugadoresAdapter.Juga
     }
 
     @Override
-    public void onBindViewHolder(@NonNull JugadoresViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull JugadoresViewHolder holder, final int position) {
         holder.name.setText(players.get(position).getName());//Holder para el nombre
         holder.Sname.setText(players.get(position).getBiografia()); //Holder para el subtitulo
 
@@ -66,6 +70,44 @@ public class JugadoresAdapter extends RecyclerView.Adapter<JugadoresAdapter.Juga
         } else {
             Picasso.with(holder.cxt).load(R.drawable.wdd).error(R.drawable.wdd).into(holder.img);
         }
+
+
+        holder.img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newIntent = new Intent(Contxt,MoreInfoPlayers.class);
+                Bundle caja = new Bundle();
+                caja.putSerializable("info2",players.get(position));
+                newIntent.putExtras(caja);
+                Contxt.startActivity(newIntent);
+            }
+        });
+
+        //En el titulo:
+
+        holder.name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newIntent = new Intent(Contxt, MoreInfoPlayers.class);
+                Bundle caja = new Bundle();
+                caja.putSerializable("info2", players.get(position));
+                newIntent.putExtras(caja);
+                Contxt.startActivity(newIntent);
+            }
+        });
+
+        //En el body:
+
+        holder.Sname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newIntent = new Intent(Contxt, MoreInfoPlayers.class);
+                Bundle caja = new Bundle();
+                caja.putSerializable("info2",players.get(position));
+                newIntent.putExtras(caja);
+                Contxt.startActivity(newIntent);
+            }
+        });
 
 
     }

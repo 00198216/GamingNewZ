@@ -47,6 +47,8 @@
     <string name="fifa">fifa</string>
     <string name="welcomep">Welcome Back!</string>
     <string name="userp">User</string>
+    <string name="title_activity_more_info_players">MoreInfoPlayers</string>
+    <string name="biografia">Biografia</string>
 
 
 </resources>

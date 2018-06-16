@@ -34,7 +34,11 @@
         </activity>
         <activity android:name=".Activities.Activities.MoreInfo" />
         <activity android:name=".Activities.Cardview.PlayerCardView" />
-        <activity android:name=".Activities.Cardview.PictureCardView"></activity>
+        <activity android:name=".Activities.Cardview.PictureCardView" />
+        <activity
+            android:name=".Activities.Activities.MoreInfoPlayers"
+            android:label="@string/title_activity_more_info_players"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
