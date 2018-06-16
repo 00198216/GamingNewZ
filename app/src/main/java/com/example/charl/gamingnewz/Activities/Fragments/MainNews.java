@@ -102,14 +102,22 @@ public class MainNews extends Fragment {
         Swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+
+
                 new Handler().postDelayed(new Runnable() { //Un Hilo
                     @Override
                     public void run() {
-                        NViewModel = new NewsViewModel(getActivity().getApplication());   //Creamos una nueva instancia
-                        Swipe.setRefreshing(false);
+                        try {
+                            NViewModel = new NewsViewModel(getActivity().getApplication());   //Creamos una nueva instancia
+                            Swipe.setRefreshing(false);
+                        } catch (Exception e) {
+                        }
+
                     }
                 }, 4000); //Cuanto va cargar
             }
+
+
         });
 
 

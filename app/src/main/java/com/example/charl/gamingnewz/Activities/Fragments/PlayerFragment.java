@@ -94,14 +94,22 @@ public class PlayerFragment extends Fragment {
         Swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+
+
                 new Handler().postDelayed(new Runnable() { //Un Hilo
                     @Override
                     public void run() {
-                        NViewModel = new PlayersViewModel(getActivity().getApplication());   //Creamos una nueva instancia
-                        Swipe.setRefreshing(false);
+                        try {
+                            NViewModel = new PlayersViewModel(getActivity().getApplication());   //Creamos una nueva instancia
+                            Swipe.setRefreshing(false);
+                        } catch (Exception e) {
+                        }
+
                     }
                 }, 4000); //Cuanto va cargar
             }
+
+
         });
 
 
@@ -114,7 +122,7 @@ public class PlayerFragment extends Fragment {
                 public void onChanged(@Nullable List<Players> players) {
                     adapter = new JugadoresAdapter((ArrayList<Players>) players, getContext());
                     LManager = new LinearLayoutManager(getActivity());
-                    
+
                     rv.setLayoutManager(LManager);
                     rv.setAdapter(adapter);
                 }
