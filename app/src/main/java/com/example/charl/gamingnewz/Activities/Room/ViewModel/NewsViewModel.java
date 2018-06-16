@@ -24,9 +24,7 @@ public class NewsViewModel extends AndroidViewModel{
         super(application);
         NwsRep = new NewsRepository(application);
         list= NwsRep.getAllNews();
-        list1= NwsRep.getLolNews();
-        list2= NwsRep.getOverNews();
-        list3= NwsRep.getCsgoNews();
+        list1= NwsRep.getCatNews();
         list4= NwsRep.getGames();
     }
 
@@ -34,16 +32,8 @@ public class NewsViewModel extends AndroidViewModel{
         return list;
     }
 
-    public LiveData<List<News>> getLolNews(){
+    public LiveData<List<News>> getCatNews(){
         return list1;
-    }
-
-    public LiveData<List<News>> getOverNews(){
-        return list2;
-    }
-
-    public LiveData<List<News>> getCsgoNews(){
-        return list3;
     }
 
     public LiveData<List<String>> getGames(){

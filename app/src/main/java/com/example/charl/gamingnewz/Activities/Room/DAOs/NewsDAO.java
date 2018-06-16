@@ -5,6 +5,8 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
+import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.example.charl.gamingnewz.Activities.POJO.News;
 import com.example.charl.gamingnewz.Activities.POJO.Players;
@@ -29,14 +31,9 @@ public interface NewsDAO {
     @Query("SELECT DISTINCT Game FROM News_Table ")
     LiveData<List<String>> getGame();  //Livedata permite que este objeto sea Observado.
 
-    @Query("SELECT * FROM News_Table WHERE Game like '%lol%' ORDER BY CreatedDate DESC")
-    LiveData<List<News>> getLolNews();  //Livedata permite que este objeto sea Observado.
+    @Query("SELECT * FROM News_Table WHERE Game = :CGame ORDER BY CreatedDate DESC")
+    LiveData<List<News>> getCatNews(String CGame);  //Livedata permite que este objeto sea Observado.
 
-    @Query("SELECT * FROM News_Table WHERE Game like '%overwatch%' ORDER BY CreatedDate DESC")
-    LiveData<List<News>> getOverNews();  //Livedata permite que este objeto sea Observado.
-
-    @Query("SELECT * FROM News_Table WHERE Game like '%csgo%' ORDER BY CreatedDate DESC ")
-    LiveData<List<News>> getCsgoNews();  //Livedata permite que este objeto sea Observado.
 }
 
 

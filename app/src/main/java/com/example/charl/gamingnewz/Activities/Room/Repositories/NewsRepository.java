@@ -32,11 +32,10 @@ public class NewsRepository {
 
     private NewsDAO newsDao;  //El DAO
     private LiveData<List<News>> list;   // La lista donde recibiremos los datos
-    private LiveData<List<News>> LolNews;   // La lista donde recibiremos los datos
-    private LiveData<List<News>> OverNews;
-    private LiveData<List<News>> CsgoNews;
+    private LiveData<List<News>> CatNews;   // La lista donde recibiremos los datos
     private LiveData<List<String>> Game;
     private String UsrToken;
+    private String CurrentGame;
     private Context ctx;
     private Application app;
 
@@ -53,26 +52,19 @@ public class NewsRepository {
         SharedPreferences sharedPref = application.getSharedPreferences("LToken",Context.MODE_PRIVATE);
         UsrToken = sharedPref.getString("Token","");
 
+        SharedPreferences GameList = application.getSharedPreferences("Game", Context.MODE_PRIVATE);
+        CurrentGame=  GameList.getString("Games","");
 
         ConsumeNews();
         list= newsDao.getAllNews();
-        LolNews = newsDao.getLolNews();
-        OverNews = newsDao.getOverNews();
-        CsgoNews = newsDao.getCsgoNews();
+        CatNews = newsDao.getCatNews(CurrentGame);
         Game = newsDao.getGame();
     }
 
-    public LiveData<List<News>> getLolNews() {
-        return LolNews;
+    public LiveData<List<News>> getCatNews() {
+        return CatNews;
     }
 
-    public LiveData<List<News>> getOverNews() {
-        return OverNews;
-    }
-
-    public LiveData<List<News>> getCsgoNews() {
-        return CsgoNews;
-    }
 
     public LiveData<List<String>> getGames() {
         return Game;

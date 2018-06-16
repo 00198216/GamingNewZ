@@ -140,11 +140,9 @@ public class MainNews extends Fragment {
                     rv.setAdapter(adapter);
                 }
             });
-        }
-
-        if(Game.contains("League of Legends") ) {
+        }else{
             NViewModel = ViewModelProviders.of(this).get(NewsViewModel.class);
-            NViewModel.getLolNews().observe(this, new Observer<List<News>>() {
+            NViewModel.getCatNews().observe(this, new Observer<List<News>>() {
                 @Override
                 public void onChanged(@Nullable List<News> news) {
                     adapter = new NewsAdapter((ArrayList<News>) news, getContext());
@@ -165,59 +163,8 @@ public class MainNews extends Fragment {
                     rv.setAdapter(adapter);
                 }
             });
+
         }
-
-        if(Game.contains("Overwatch") ) {
-            NViewModel = ViewModelProviders.of(this).get(NewsViewModel.class);
-            NViewModel.getOverNews().observe(this, new Observer<List<News>>() {
-                @Override
-                public void onChanged(@Nullable List<News> news) {
-                    adapter = new NewsAdapter((ArrayList<News>) news, getContext());
-                    gManager = new GridLayoutManager(getActivity(), 2);
-                    gManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                        @Override
-                        public int getSpanSize(int position) {
-                            if (position % 3 == 0) {
-                                return 2;
-                            } else {
-                                return 1;
-                            }
-                        }
-                    });
-
-
-                    rv.setLayoutManager(gManager);
-                    rv.setAdapter(adapter);
-                }
-            });
-        }
-
-        if(Game.contains("CSGO") ) {
-            NViewModel = ViewModelProviders.of(this).get(NewsViewModel.class);
-            NViewModel.getCsgoNews().observe(this, new Observer<List<News>>() {
-                @Override
-                public void onChanged(@Nullable List<News> news) {
-                    adapter = new NewsAdapter((ArrayList<News>) news, getContext());
-                    gManager = new GridLayoutManager(getActivity(), 2);
-                    gManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                        @Override
-                        public int getSpanSize(int position) {
-                            if (position % 3 == 0) {
-                                return 2;
-                            } else {
-                                return 1;
-                            }
-                        }
-                    });
-
-
-                    rv.setLayoutManager(gManager);
-                    rv.setAdapter(adapter);
-                }
-            });
-        }
-
-
 
         return vista;
     }

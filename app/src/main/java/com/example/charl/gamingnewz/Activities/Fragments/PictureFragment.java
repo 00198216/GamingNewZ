@@ -104,9 +104,9 @@ public class PictureFragment extends Fragment {
         rv = vista.findViewById(R.id.recycler3);
 
 
-        if(Game.contains("League of Legends") ) {
+
             NViewModel = ViewModelProviders.of(this).get(NewsViewModel.class);
-            NViewModel.getLolNews().observe(this, new Observer<List<News>>() {
+            NViewModel.getCatNews().observe(this, new Observer<List<News>>() {
                 @Override
                 public void onChanged(@Nullable List<News> news) {
                     adapter = new PictureAdapter((ArrayList<News>) news, getContext());
@@ -117,37 +117,8 @@ public class PictureFragment extends Fragment {
                     rv.setAdapter(adapter);
                 }
             });
-        }
-
-        if(Game.contains("Overwatch") ) {
-            NViewModel = ViewModelProviders.of(this).get(NewsViewModel.class);
-            NViewModel.getOverNews().observe(this, new Observer<List<News>>() {
-                @Override
-                public void onChanged(@Nullable List<News> news) {
-                    adapter = new PictureAdapter((ArrayList<News>) news, getContext());
-                    gManager = new GridLayoutManager(getActivity(), 2);
 
 
-                    rv.setLayoutManager(gManager);
-                    rv.setAdapter(adapter);
-                }
-            });
-        }
-
-        if(Game.contains("CSGO") ) {
-            NViewModel = ViewModelProviders.of(this).get(NewsViewModel.class);
-            NViewModel.getCsgoNews().observe(this, new Observer<List<News>>() {
-                @Override
-                public void onChanged(@Nullable List<News> news) {
-                    adapter = new PictureAdapter((ArrayList<News>) news, getContext());
-                    gManager = new GridLayoutManager(getActivity(), 2);
-
-
-                    rv.setLayoutManager(gManager);
-                    rv.setAdapter(adapter);
-                }
-            });
-        }
 
         return vista;
     }
