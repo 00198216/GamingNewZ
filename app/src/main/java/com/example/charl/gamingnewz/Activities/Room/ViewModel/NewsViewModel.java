@@ -15,8 +15,6 @@ public class NewsViewModel extends AndroidViewModel{
     private NewsRepository NwsRep;
     private LiveData<List<News>> list;
     private LiveData<List<News>> list1;
-    private LiveData<List<News>> list2;
-    private LiveData<List<News>> list3;
     private LiveData<List<String>> list4;
 
 

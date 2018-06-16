@@ -104,57 +104,23 @@ public class PlayerFragment extends Fragment {
             }
         });
 
-        if(Game.contains("League of Legends") ) {
+
+
             NViewModel = ViewModelProviders.of(this).get(PlayersViewModel.class);
-            NViewModel.getLolPlayers().observe(this, new Observer<List<Players>>() {
+            NViewModel.getCatPlayers().observe(this, new Observer<List<Players>>() {
 
 
                 @Override
                 public void onChanged(@Nullable List<Players> players) {
                     adapter = new JugadoresAdapter((ArrayList<Players>) players, getContext());
                     LManager = new LinearLayoutManager(getActivity());
-
-
+                    
                     rv.setLayoutManager(LManager);
                     rv.setAdapter(adapter);
                 }
             });
-        }
-
-        if(Game.contains("Overwatch") ) {
-            NViewModel = ViewModelProviders.of(this).get(PlayersViewModel.class);
-            NViewModel.getOverPlayers().observe(this, new Observer<List<Players>>() {
 
 
-                @Override
-                public void onChanged(@Nullable List<Players> players) {
-                    adapter = new JugadoresAdapter((ArrayList<Players>) players, getContext());
-                    LManager = new LinearLayoutManager(getActivity());
-
-
-                    rv.setLayoutManager(LManager);
-                    rv.setAdapter(adapter);
-                }
-            });
-        }
-
-
-        if(Game.contains("CSGO") ) {
-            NViewModel = ViewModelProviders.of(this).get(PlayersViewModel.class);
-            NViewModel.getCsgoPlayers().observe(this, new Observer<List<Players>>() {
-
-
-                @Override
-                public void onChanged(@Nullable List<Players> players) {
-                    adapter = new JugadoresAdapter((ArrayList<Players>) players, getContext());
-                    LManager = new LinearLayoutManager(getActivity());
-
-
-                    rv.setLayoutManager(LManager);
-                    rv.setAdapter(adapter);
-                }
-            });
-        }
 
             return vista;
     }

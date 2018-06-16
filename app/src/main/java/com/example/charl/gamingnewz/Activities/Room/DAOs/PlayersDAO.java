@@ -18,12 +18,6 @@ public interface PlayersDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertPlayer(Players... players);
 
-    @Query("SELECT * FROM Players_Table WHERE game like '%lol%' ")
-    LiveData<List<Players>> getLolPlayers();  //Livedata permite que este objeto sea Observado.
-
-    @Query("SELECT * FROM Players_Table WHERE game like '%overwatch%' ")
-    LiveData<List<Players>> getOverPlayers();  //Livedata permite que este objeto sea Observado.
-
-    @Query("SELECT * FROM Players_Table WHERE game like '%csgo%' ")
-    LiveData<List<Players>> getCsgoPlayers();  //Livedata permite que este objeto sea Observado.
+    @Query("SELECT * FROM Players_Table WHERE Game = :CGame")
+    LiveData<List<Players>> getCatPlayers(String CGame);  //Livedata permite que este objeto sea Observado.
 }

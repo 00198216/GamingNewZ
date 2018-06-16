@@ -27,11 +27,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class PlayersRepository {
 
     private PlayersDAO playerDao;  //El DAO
-    private LiveData<List<Players>> LolPlayers;   // La lista donde recibiremos los datos
-    private LiveData<List<Players>> OverPlayers;
-    private LiveData<List<Players>> CsgoPlayers;
+    private LiveData<List<Players>> CatPlayers;   // La lista donde recibiremos los datos
     private String UsrToken;
     public Context ctx;
+    private String CurrentGame;
     private Application app;
 
     public PlayersRepository(Application application) { //Application es para Viewmodel.
@@ -45,22 +44,15 @@ public class PlayersRepository {
         SharedPreferences sharedPref = application.getSharedPreferences("LToken", Context.MODE_PRIVATE);
         UsrToken = sharedPref.getString("Token", "");
 
+        SharedPreferences GameList = application.getSharedPreferences("Game", Context.MODE_PRIVATE);
+        CurrentGame=  GameList.getString("Games","");
+
         GetPlayers();
-        LolPlayers = playerDao.getLolPlayers();
-        OverPlayers = playerDao.getOverPlayers();
-        CsgoPlayers = playerDao.getCsgoPlayers();
+        CatPlayers = playerDao.getCatPlayers(CurrentGame);
     }
 
-    public LiveData<List<Players>> getLolPlayers() {
-        return LolPlayers;
-    }
-
-    public LiveData<List<Players>> getOverPlayers() {
-        return OverPlayers;
-    }
-
-    public LiveData<List<Players>> getCsgoPlayers() {
-        return CsgoPlayers;
+    public LiveData<List<Players>> getCatPlayers() {
+        return CatPlayers;
     }
 
     public void GetPlayers() {
