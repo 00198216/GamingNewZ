@@ -8,8 +8,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -51,6 +53,7 @@ public class MainNews extends Fragment {
     NewsAdapter adapter;
     NewsViewModel NViewModel;
     GridLayoutManager gManager;
+    SwipeRefreshLayout Swipe;
     public int valor;
     private String  Game;
 
@@ -94,8 +97,24 @@ public class MainNews extends Fragment {
         SharedPreferences sharedPref = getContext().getSharedPreferences("Game",Context.MODE_PRIVATE);
         Game = sharedPref.getString("Games","");
 
+        Swipe= vista.findViewById(R.id.Swipe);
+
+        Swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() { //Un Hilo
+                    @Override
+                    public void run() {
+                        NViewModel = new NewsViewModel(getActivity().getApplication());   //Creamos una nueva instancia
+                        Swipe.setRefreshing(false);
+                    }
+                }, 4000); //Cuanto va cargar
+            }
+        });
+
 
         rv = vista.findViewById(R.id.recycler);
+
 
 
         if(Game.contains("Ultimas Noticias") ) {

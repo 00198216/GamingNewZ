@@ -7,6 +7,11 @@
     android:id="@+id/Phothoz"
     android:background="@drawable/side_nav_bar">
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/Swipe3">
+
     <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -15,6 +20,8 @@
         android:scrollbars="vertical">
 
     </android.support.v7.widget.RecyclerView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 
 </FrameLayout>

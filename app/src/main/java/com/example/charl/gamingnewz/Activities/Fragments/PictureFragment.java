@@ -6,8 +6,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -41,6 +43,7 @@ public class PictureFragment extends Fragment {
     NewsViewModel NViewModel;
     GridLayoutManager gManager;
     public int valor;
+    SwipeRefreshLayout Swipe;
     private String Game;
 
     // TODO: Rename and change types of parameters
@@ -82,6 +85,21 @@ public class PictureFragment extends Fragment {
 
         SharedPreferences sharedPref = getContext().getSharedPreferences("Game",Context.MODE_PRIVATE);
         Game = sharedPref.getString("Games","");
+
+        Swipe= vista.findViewById(R.id.Swipe3);
+
+        Swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() { //Un Hilo
+                    @Override
+                    public void run() {
+                        NViewModel = new NewsViewModel(getActivity().getApplication());   //Creamos una nueva instancia
+                        Swipe.setRefreshing(false);
+                    }
+                }, 4000); //Cuanto va cargar
+            }
+        });
 
         rv = vista.findViewById(R.id.recycler3);
 
