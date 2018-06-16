@@ -35,6 +35,7 @@ public class NewsRepository {
     private LiveData<List<News>> LolNews;   // La lista donde recibiremos los datos
     private LiveData<List<News>> OverNews;
     private LiveData<List<News>> CsgoNews;
+    private LiveData<List<String>> Game;
     private String UsrToken;
     private Context ctx;
     private Application app;
@@ -58,6 +59,7 @@ public class NewsRepository {
         LolNews = newsDao.getLolNews();
         OverNews = newsDao.getOverNews();
         CsgoNews = newsDao.getCsgoNews();
+        Game = newsDao.getGame();
     }
 
     public LiveData<List<News>> getLolNews() {
@@ -70,6 +72,10 @@ public class NewsRepository {
 
     public LiveData<List<News>> getCsgoNews() {
         return CsgoNews;
+    }
+
+    public LiveData<List<String>> getGames() {
+        return Game;
     }
 
 

@@ -26,6 +26,9 @@ public interface NewsDAO {
     @Query("SELECT * FROM News_Table ORDER BY CreatedDate DESC")
     LiveData<List<News>> getAllNews();  //Livedata permite que este objeto sea Observado.
 
+    @Query("SELECT DISTINCT Game FROM News_Table ")
+    LiveData<List<String>> getGame();  //Livedata permite que este objeto sea Observado.
+
     @Query("SELECT * FROM News_Table WHERE Game like '%lol%' ORDER BY CreatedDate DESC")
     LiveData<List<News>> getLolNews();  //Livedata permite que este objeto sea Observado.
 

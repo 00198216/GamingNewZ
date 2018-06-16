@@ -17,6 +17,7 @@ public class NewsViewModel extends AndroidViewModel{
     private LiveData<List<News>> list1;
     private LiveData<List<News>> list2;
     private LiveData<List<News>> list3;
+    private LiveData<List<String>> list4;
 
 
     public NewsViewModel(@NonNull Application application){
@@ -26,6 +27,7 @@ public class NewsViewModel extends AndroidViewModel{
         list1= NwsRep.getLolNews();
         list2= NwsRep.getOverNews();
         list3= NwsRep.getCsgoNews();
+        list4= NwsRep.getGames();
     }
 
     public LiveData<List<News>> getAllNews(){
@@ -42,6 +44,10 @@ public class NewsViewModel extends AndroidViewModel{
 
     public LiveData<List<News>> getCsgoNews(){
         return list3;
+    }
+
+    public LiveData<List<String>> getGames(){
+        return list4;
     }
 
     public void consumirNoticias(){
