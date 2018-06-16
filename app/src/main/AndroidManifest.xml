@@ -38,7 +38,8 @@
         <activity
             android:name=".Activities.Activities.MoreInfoPlayers"
             android:label="@string/title_activity_more_info_players"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activities.Cardview.DrawerCardView"></activity>
     </application>
 
 </manifest>

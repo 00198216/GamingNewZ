@@ -49,6 +49,7 @@
     <string name="userp">User</string>
     <string name="title_activity_more_info_players">MoreInfoPlayers</string>
     <string name="biografia">Biografia</string>
+    <string name="juego_nombre">Juego_nombre</string>
 
 
 </resources>

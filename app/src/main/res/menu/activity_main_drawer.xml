@@ -3,68 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <!-- Preparando los items del navigation drawer -->
-
     <group android:checkableBehavior="single">
-
         <item
-            android:id="@+id/news"
+            android:id="@+id/newsD"
             android:icon="@drawable/ic_new_releases_black_24dp"
-            android:title="@string/news"
-            android:color="@android:color/white"/>
-
-
-        <item android:title="@string/games" android:color="@android:color/white">
-
-        <menu>
-
-        <item
-            android:id="@+id/games1"
-            android:icon="@drawable/ic_stars_black_24dp"
-            android:title="@string/games1"
-            android:color="@android:color/white"/>
-
-        <item
-            android:id="@+id/games2"
-            android:icon="@drawable/ic_stars_black_24dp"
-            android:title="@string/overwatch"
-            android:color="@android:color/white"/>
-
-        <item
-            android:id="@+id/games3"
-            android:icon="@drawable/ic_stars_black_24dp"
-            android:title="@string/games3"
-            android:color="@android:color/white"/>
-            <!--
-           <item
-               android:id="@+id/games4"
-               android:icon="@drawable/ic_stars_black_24dp"
-               android:title="@string/fifa"
-               android:color="@android:color/white"/>  -->
-
-        </menu>
+            android:title="@string/news">
         </item>
-
-        <item android:title="@string/otros" >
-        <menu>
-
-        <item
-            android:id="@+id/settings"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/settings"
-            android:color="@android:color/white"/>
-
-        <item
-            android:id="@+id/favorites"
-            android:icon="@drawable/ic_favorite_black_24dp"
-            android:title="@string/favorites"
-            android:color="@android:color/white"/>
-
-        </menu>
-
-        </item>
-
     </group>
-
 
 </menu>

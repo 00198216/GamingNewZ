@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/DrawerCV"
+    card_view:cardCornerRadius="0dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/BGDCV"
+        android:background="@drawable/side_nav_bar"
+        android:gravity="center_vertical"
+        android:layout_height="65dp">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="4dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_stars_black_24dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:layout_weight="5"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:shadowColor="#000000"
+                android:id="@+id/GameName"
+                android:textColor="@android:color/white"
+                android:maxLines="1"
+                android:textSize="16sp"
+                android:layout_weight="1"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center_vertical"
+                android:textAppearance="@android:style/TextAppearance.Large"
+                android:text="@string/juego_nombre"/>
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

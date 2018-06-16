@@ -24,6 +24,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.charl.gamingnewz.Activities.Fragments.DinamicDrawer;
 import com.example.charl.gamingnewz.Activities.Fragments.MainNews;
 import com.example.charl.gamingnewz.Activities.Fragments.PictureFragment;
 import com.example.charl.gamingnewz.Activities.Fragments.PlayerFragment;
@@ -31,7 +32,7 @@ import com.example.charl.gamingnewz.Activities.Fragments.TabbedFragment;
 import com.example.charl.gamingnewz.R;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener , MainNews.OnFragmentInteractionListener,TabbedFragment.OnFragmentInteractionListener,PlayerFragment.OnFragmentInteractionListener, PictureFragment.OnFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener , MainNews.OnFragmentInteractionListener,TabbedFragment.OnFragmentInteractionListener,PlayerFragment.OnFragmentInteractionListener, PictureFragment.OnFragmentInteractionListener,DinamicDrawer.OnFragmentInteractionListener{
 
    public static Boolean flag = true;
    private TextView name;
@@ -71,8 +72,11 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setItemTextColor(ColorStateList.valueOf(Color.WHITE));
         navigationView.setNavigationItemSelectedListener(this);
+        NavigationView navigationView2 = (NavigationView) findViewById(R.id.nav_view3);
+        navigationView2.setNavigationItemSelectedListener(this);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.incluido, new DinamicDrawer()).commit();
     }
 
     @Override
@@ -120,7 +124,7 @@ public class MainActivity extends AppCompatActivity
 
         int id = item.getItemId();
 
-        if (id == R.id.news) {
+        if (id == R.id.newsD) {
 
             f= new MainNews();
 
@@ -128,45 +132,13 @@ public class MainActivity extends AppCompatActivity
 
             state= true;
 
-        } else if (id == R.id.games1) {
-
-            f= new TabbedFragment();
-
-            Game.edit().putString("Games",(String) item.getTitle()).apply();
-
-            state= true;
-
-        } else if (id == R.id.games2) {
-
-            f= new TabbedFragment();
-
-            Game.edit().putString("Games",(String) item.getTitle()).apply();
-            state= true;
-
-
-        }else if (id == R.id.games3) {
-
-            f= new TabbedFragment();
-
-            Game.edit().putString("Games",(String) item.getTitle()).apply();
-            state= true;
-
-
-        } /*else if (id == R.id.games4) {
-
-            f= new TabbedFragment();
-
-            Game.edit().putString("Games",(String) item.getTitle()).apply();
-
-            state= true;
-
-        }*/ else if (id == R.id.settings) {
+        } else if (id == R.id.SettingsD) {
 
             Intent intent = new Intent(getApplicationContext(), Settings.class);
             startActivity(intent);
 
-        } else if (id == R.id.favorites) {
-            // Fragment de favoritos
+        } else if (id == R.id.FavD) {
+
         }
 
         if(state){
