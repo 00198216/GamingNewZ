@@ -110,7 +110,7 @@ public class PictureFragment extends Fragment {
                 @Override
                 public void onChanged(@Nullable List<News> news) {
                     adapter = new PictureAdapter((ArrayList<News>) news, getContext());
-                    gManager = new GridLayoutManager(getActivity(), 3);
+                    gManager = new GridLayoutManager(getActivity(), 2);
 
 
                     rv.setLayoutManager(gManager);
@@ -125,7 +125,7 @@ public class PictureFragment extends Fragment {
                 @Override
                 public void onChanged(@Nullable List<News> news) {
                     adapter = new PictureAdapter((ArrayList<News>) news, getContext());
-                    gManager = new GridLayoutManager(getActivity(), 3);
+                    gManager = new GridLayoutManager(getActivity(), 2);
 
 
                     rv.setLayoutManager(gManager);
@@ -140,7 +140,7 @@ public class PictureFragment extends Fragment {
                 @Override
                 public void onChanged(@Nullable List<News> news) {
                     adapter = new PictureAdapter((ArrayList<News>) news, getContext());
-                    gManager = new GridLayoutManager(getActivity(), 3);
+                    gManager = new GridLayoutManager(getActivity(), 2);
 
 
                     rv.setLayoutManager(gManager);
