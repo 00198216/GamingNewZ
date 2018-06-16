@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Activities.Activities.MoreInfo"
-    tools:showIn="@layout/content_all_news"
+    tools:showIn="@layout/activity_more_info"
     android:background="@drawable/more_info_color">
 
 
@@ -104,7 +104,7 @@
                     android:text="@string/descripcion"
                     android:fontFamily="sans-serif-condensed"
                     android:textColor="#fff"
-                    android:textSize="13sp"
+                    android:textSize="20sp"
                     android:textAlignment="center"/>
 
                 <!--Cuerpo de la noticia-->
@@ -115,7 +115,7 @@
                     android:text="@string/body"
                     android:fontFamily="sans-serif-condensed"
                     android:textColor="#fff"
-                    android:textSize="13sp"
+                    android:textSize="20sp"
                     android:textAlignment="center"/>
 
 
