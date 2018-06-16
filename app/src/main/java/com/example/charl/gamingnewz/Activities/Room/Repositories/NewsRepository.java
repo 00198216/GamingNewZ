@@ -3,10 +3,12 @@ package com.example.charl.gamingnewz.Activities.Room.Repositories;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import com.example.charl.gamingnewz.Activities.Activities.Login;
 import com.example.charl.gamingnewz.Activities.Adapters.NewsAdapter;
 import com.example.charl.gamingnewz.Activities.Interfaces.GamingNewZAPI;
 import com.example.charl.gamingnewz.Activities.POJO.News;
@@ -35,12 +37,16 @@ public class NewsRepository {
     private LiveData<List<News>> CsgoNews;
     private String UsrToken;
     private Context ctx;
+    private Application app;
+
 
 
     public NewsRepository(Application application){ //Application es para Viewmodel.
 
         GamingNewZDatatbase db= GamingNewZDatatbase.getAppDataBase(application);
         newsDao = db.newsDAO();
+
+        app= application;
 
         //Recuperando el Token
         SharedPreferences sharedPref = application.getSharedPreferences("LToken",Context.MODE_PRIVATE);
@@ -72,7 +78,7 @@ public class NewsRepository {
     }
 
     public void ConsumeNews(){
-        new ConsNews(UsrToken,newsDao).execute();
+        new ConsNews(UsrToken,newsDao,app).execute();
     }
 
     //Subclase para Jalar la noticia de la Base
@@ -102,10 +108,12 @@ public class NewsRepository {
 
         private String UsrToken;
         private NewsDAO newsDao;
+        private Application app;
 
-        public ConsNews(String UsrToken,NewsDAO newsDAO){
+        public ConsNews(String UsrToken,NewsDAO newsDAO,Application app){
             this.UsrToken= UsrToken;
             this.newsDao= newsDAO;
+            this.app = app;
         }
 
 
@@ -123,19 +131,23 @@ public class NewsRepository {
                 public void onResponse(Call<ArrayList<News>> call, Response<ArrayList<News>> response) {
                     if(response.isSuccessful()){
 
-                        System.out.println(response.code()+"");
                         ArrayList<News> newz =(ArrayList<News>) response.body();
                         //Collections.reverse(newz); // Por este medio le damos vuelta a la lista de mas nuevo a mas viejo.
                         new AsyncTaskI(newsDao).execute(newz);
 
                     }else {
-                        System.out.println(response.code()+"");
+                        Toast.makeText(app,response.code()+""+" Token Vencido. Por favor iniciar seccion.",Toast.LENGTH_SHORT).show();
+                         SharedPreferences SavedLogin = app.getSharedPreferences("LToken", Context.MODE_PRIVATE);;
+                        SavedLogin.edit().clear().apply();
+                        Intent intent = new Intent(app,Login.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        app.startActivity(intent);
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ArrayList<News>> call, Throwable t) {
-                    System.out.println("Error de connexion");
+                    Toast.makeText(app,"Error de Conexion",Toast.LENGTH_SHORT).show();
                 }
             });
             return null;

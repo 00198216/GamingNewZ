@@ -3,6 +3,7 @@ package com.example.charl.gamingnewz.Activities.Room.Repositories;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.widget.Toast;
@@ -31,11 +32,14 @@ public class PlayersRepository {
     private LiveData<List<Players>> CsgoPlayers;
     private String UsrToken;
     public Context ctx;
+    private Application app;
 
     public PlayersRepository(Application application) { //Application es para Viewmodel.
 
         GamingNewZDatatbase db = GamingNewZDatatbase.getAppDataBase(application);
         playerDao = db.playersDAO();
+
+        app= application;
 
         //Recuperando el Token
         SharedPreferences sharedPref = application.getSharedPreferences("LToken", Context.MODE_PRIVATE);
@@ -60,7 +64,7 @@ public class PlayersRepository {
     }
 
     public void GetPlayers() {
-        new GtPlayers(UsrToken, playerDao).execute();
+        new GtPlayers(UsrToken, playerDao,app).execute();
     }
 
 
@@ -91,16 +95,12 @@ public class PlayersRepository {
 
         private String UsrToken;
         private PlayersDAO playerDao;
-        public static String code;
+        private Application app;
 
-        public GtPlayers(String UsrToken, PlayersDAO playerDao) {
+        public GtPlayers(String UsrToken, PlayersDAO playerDao,Application app) {
             this.UsrToken = UsrToken;
             this.playerDao = playerDao;
-        }
-
-
-        public static String  GetCode(){
-            return code;
+            this.app= app;
         }
 
 
@@ -119,22 +119,23 @@ public class PlayersRepository {
                 @Override
                 public void onResponse(Call<ArrayList<Players>> call, Response<ArrayList<Players>> response) {
                     if (response.isSuccessful()) {
-                        code= response.code()+"";
-                        System.out.println(response.code()+"");
                         ArrayList<Players> newz = (ArrayList<Players>) response.body();
                         //Collections.reverse(newz); // Por este medio le damos vuelta a la lista de mas nuevo a mas viejo.
                         new AsyncTaskI(playerDao).execute(newz);
 
                     } else {
-                        code= response.code()+"";
-                        System.out.println(response.code()+"");
+                        Toast.makeText(app,response.code()+""+" Token Vencido. Por favor iniciar seccion.",Toast.LENGTH_SHORT).show();
+                        SharedPreferences SavedLogin = app.getSharedPreferences("LToken", Context.MODE_PRIVATE);;
+                        SavedLogin.edit().clear().apply();
+                        Intent intent = new Intent(app,Login.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        app.startActivity(intent);
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ArrayList<Players>> call, Throwable t) {
-                    code= t.getMessage()+"";
-                    System.out.println(t.getMessage()+"");
+                    Toast.makeText(app,"Error de Conexion",Toast.LENGTH_SHORT).show();
                 }
             });
             return null;
