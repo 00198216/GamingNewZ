@@ -50,6 +50,8 @@
     <string name="title_activity_more_info_players">MoreInfoPlayers</string>
     <string name="biografia">Biografia</string>
     <string name="juego_nombre">Juego_nombre</string>
+    <string name="notice">Te traemos las noticias a la palma de la mano</string>
+    <string name="gamingnewz">GamingNewZ</string>
 
 
 </resources>
